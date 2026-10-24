@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="440" viewBox="0 0 1280 440" role="img" aria-labelledby="title description">
+  <title id="title">Neuroelectric MRI</title>
+  <desc id="description">From neuronal currents to magnetic fields to MR signals. A research atlas spanning ncMRI, spin-lock methods, MREIT, and simulation.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111b35"/>
+      <stop offset="1" stop-color="#0b1120"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" x2="1">
+      <stop offset="0" stop-color="#38d9d0"/>
+      <stop offset="0.52" stop-color="#9b8cff"/>
+      <stop offset="1" stop-color="#ffbd69"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#778bad" stroke-opacity="0.08"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="440" rx="22" fill="url(#background)"/>
+  <rect width="1280" height="440" rx="22" fill="url(#grid)"/>
+  <rect x="48" y="42" width="54" height="4" rx="2" fill="#38d9d0"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="116" y="49" font-size="14" font-weight="700" letter-spacing="3" fill="#b5c6e3">RESEARCH ATLAS + SIMULATION WORKBENCH</text>
+    <text x="48" y="119" font-size="58" font-weight="700" letter-spacing="-2" fill="#f4f7ff">Neuroelectric MRI</text>
+    <text x="50" y="157" font-size="21" fill="#b5c6e3">A quarter-century of questions. A forward model for what comes next.</text>
+
+    <rect x="48" y="194" width="360" height="170" rx="14" fill="#102b32" stroke="#38d9d0" stroke-opacity="0.42"/>
+    <rect x="460" y="194" width="360" height="170" rx="14" fill="#24213e" stroke="#a89aff" stroke-opacity="0.45"/>
+    <rect x="872" y="194" width="360" height="170" rx="14" fill="#32291e" stroke="#ffbd69" stroke-opacity="0.42"/>
+
+    <!-- Stylized source tree: conceptual illustration, not neuronal morphology data. -->
+    <g fill="none" stroke="#38d9d0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M105 247L89 231L72 234M89 231L88 217M105 247L128 226L143 229M128 226L131 213M105 247L106 273L86 289M106 273L126 286M105 247L77 255L65 270M77 255L62 249M105 247L142 254L166 244"/>
+      <circle cx="105" cy="247" r="10" fill="#38d9d0" fill-opacity="0.18"/>
+    </g>
+    <text x="190" y="238" font-size="13" font-weight="700" letter-spacing="2" fill="#73e7df">01 / SOURCES</text>
+    <text x="190" y="266" font-size="22" font-weight="700" fill="#f4f7ff">Currents</text>
+    <text x="70" y="319" font-size="17" fill="#c0d9dc">Neural activity · imposed currents</text>
+    <text x="70" y="343" font-size="14" fill="#8db3bd">Morphology, synchrony, conductivity</text>
+
+    <!-- Field contours are symbolic. -->
+    <g fill="none" stroke="#b4a6ff" stroke-width="2">
+      <ellipse cx="523" cy="249" rx="17" ry="31"/>
+      <ellipse cx="523" cy="249" rx="31" ry="19"/>
+      <ellipse cx="523" cy="249" rx="42" ry="9"/>
+      <path d="M523 213V285" stroke-dasharray="3 5" opacity="0.55"/>
+      <circle cx="523" cy="249" r="4" fill="#b4a6ff"/>
+    </g>
+    <text x="602" y="238" font-size="13" font-weight="700" letter-spacing="2" fill="#b4a6ff">02 / PHYSICS</text>
+    <text x="602" y="266" font-size="22" font-weight="700" fill="#f4f7ff">Fields</text>
+    <text x="482" y="319" font-size="17" fill="#d1c9e7">Biot–Savart · Bloch · spin lock</text>
+    <text x="482" y="343" font-size="14" fill="#aaa0c7">Geometry, orientation, cancellation</text>
+
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M893 253H1010" stroke="#ffbd69" stroke-opacity="0.25"/>
+      <path d="M894 253H915L925 239L934 272L944 220L954 278L964 241L976 259L986 253H1010" stroke="#ffbd69" stroke-width="2.5"/>
+    </g>
+    <text x="1023" y="238" font-size="13" font-weight="700" letter-spacing="2" fill="#ffcb86">03 / EVIDENCE</text>
+    <text x="1023" y="266" font-size="22" font-weight="700" fill="#f4f7ff">MR signals</text>
+    <text x="894" y="319" font-size="17" fill="#e4d3bd">Phase · magnitude · reconstruction</text>
+    <text x="894" y="343" font-size="14" fill="#c2ab8b">Sensitivity, confounds, replication</text>
+
+    <g fill="none" stroke="#8295b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M420 279H446M439 272L446 279L439 286"/>
+      <path d="M832 279H858M851 272L858 279L851 286"/>
+    </g>
+    <rect x="48" y="391" width="1184" height="2" fill="url(#accent)" opacity="0.8"/>
+    <text x="49" y="420" font-size="13" letter-spacing="1.5" fill="#9eafcb">ncMRI / SIRS / REX / NEMO / MREIT / MRCDI / POSSUM / SBI</text>
+    <text x="1230" y="420" text-anchor="end" font-size="13" letter-spacing="1.5" fill="#9eafcb">EVIDENCE THROUGH OCT 2026</text>
+  </g>
+</svg>

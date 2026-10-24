@@ -1,10 +1,33 @@
-# Neuroelectric MRI
+<p align="center">
+  <img src="assets/readme-hero.svg" alt="Neuroelectric MRI: currents, fields, and MR signals — a research atlas and simulation workbench" width="100%">
+</p>
+
+# 🧠 Neuroelectric MRI
+
+<p>
+  <a href="docs/reading-list.md"><img src="https://img.shields.io/badge/annotated_sources-43-16a6a0?style=flat-square" alt="43 annotated sources"></a>
+  <a href="docs/methods.md"><img src="https://img.shields.io/badge/literature-October_2026-8b75e8?style=flat-square" alt="Literature through October 2026"></a>
+  <a href="docs/simulation-roadmap.md"><img src="https://img.shields.io/badge/simulation-POSSUM_%E2%86%92_SBI-e6a24b?style=flat-square" alt="Simulation: POSSUM to SBI"></a>
+  <a href="examples/phase_budget.py"><img src="https://img.shields.io/badge/Python-3.10%2B-4285c5?style=flat-square" alt="Python 3.10 or newer"></a>
+</p>
 
 **A research map and simulation workbench for neuronal-current MRI, MR current-density imaging, and electrical conductivity imaging.** Literature checked through **23 October 2026**.
 
-The central assessment is that endogenous neuronal-current MRI remains an experimental research problem. The reviewed literature does not establish a generally reproducible human method with both useful spatial localization and millisecond neural specificity. Measuring externally imposed current fields is substantially further along. These conclusions concern different measurement problems, so this repository keeps their evidence separate.
+**[History](docs/history.md) · [Current evidence](docs/methods.md) · [MREIT](docs/mreit.md) · [Simulation roadmap](docs/simulation-roadmap.md) · [Reading list](docs/reading-list.md)**
 
-The San Antonio paper you probably remember is **Jinhu Xiong, Peter T. Fox, and Jia-Hong Gao (2003), “Directly mapping magnetic field effects of neuronal activity by magnetic resonance imaging.”** All three were at the University of Texas Health Science Center at San Antonio. It introduced the influential **magnetic-source MRI / msMRI** claim. Xiong is the likely name; Gao is another plausible recollection. It was an early prominent report, rather than the first proposal or experiment. [Paper](https://doi.org/10.1002/hbm.10124)
+> [!IMPORTANT]
+> **Endogenous neuronal-current MRI remains an experimental research problem.** The reviewed literature does not establish a generally reproducible human method with both useful spatial localization and millisecond neural specificity. Measuring externally imposed current fields is substantially further along.
+
+## 🧭 Three connected research tracks
+
+| 🟢 Neuronal currents | 🟣 Electrical tissue properties | 🟠 Simulation and inference |
+|---|---|---|
+| Endogenous currents → magnetic fields → MR contrast | Applied currents → measured fields → conductivity estimates | Source models → scanner physics → identifiable parameters |
+| ncMRI · msMRI · SIRS · REX · NEMO | MRCDI · MREIT · DT-MREIT · fMREIT | POSSUM · Bloch models · sbi4dwi |
+| **Question:** can neural fields be detected specifically? | **Question:** which current and conductivity parameters can be recovered? | **Question:** what survives realistic acquisition and confounds? |
+| [Explore the evidence →](docs/methods.md) | [Explore MREIT →](docs/mreit.md) | [Explore the roadmap →](docs/simulation-roadmap.md) |
+
+## 🔬 Where the field stands
 
 Several developments change the assessment today:
 
@@ -14,7 +37,13 @@ Several developments change the assessment today:
 - **MREIT/MRCDI:** human field measurements, conductivity-model fitting, and acquisition improvements continued well beyond the 2000s. [2024 model calibration](https://doi.org/10.1162/imag_a_00176), [2026 SMS acquisition study](https://doi.org/10.1371/journal.pone.0341731)
 - **POSSUM is directly relevant:** its time-varying-field extension already explored current-induced MRI effects. [Drobnjak, Pell & Jenkinson, 2010](https://doi.org/10.1016/j.mri.2010.03.029)
 
-## Read the repository
+## 🕰️ The historical thread
+
+**Jinhu Xiong, Peter T. Fox, and Jia-Hong Gao's 2003 paper**, “Directly mapping magnetic field effects of neuronal activity by magnetic resonance imaging,” introduced the influential **magnetic-source MRI / msMRI** claim from the University of Texas Health Science Center at San Antonio. It was an early prominent report, preceded by other proposals and experiments. [Paper](https://doi.org/10.1002/hbm.10124)
+
+The history connects this work to **Bodurka, Petridou and Bandettini**, biological preparations, spin-lock methods, and the later DIANA debate. It also follows the parallel development of MREIT and the role of POSSUM in simulating current-induced effects. [Read the chronology →](docs/history.md)
+
+## 📚 Repository guide
 
 | File | Purpose |
 |---|---|
@@ -28,11 +57,11 @@ Several developments change the assessment today:
 | [BibTeX](references/references.bib) / [CSV](references/literature.csv) | Citation-manager and spreadsheet exports |
 | [Phase-budget example](examples/phase_budget.py) | Executable sanity checks for field-to-phase sensitivity |
 
-## Why this name?
+## 🏷️ Why this name?
 
 `neuroelectric-mri` is a useful umbrella: it accommodates endogenous current detection, injected-current calibration, and tissue conductivity without declaring any contested technique successful. The conventional narrow literature term is **neuronal-current MRI (ncMRI)**. Alternative repository names are `neuronal-current-mri` for a narrower survey or `bioelectric-mri` for eventual cardiac and peripheral-nerve coverage. NEMO, NAMO, and DIANA already identify particular methods and would make confusing umbrella names.
 
-## Run the small computational example
+## ⚡ Run the phase-budget example
 
 Python 3.10+; standard library only:
 
