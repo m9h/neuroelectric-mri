@@ -1,6 +1,14 @@
 # Search and maintenance record
 
-Last search: **2026-10-23**. This is a curated research survey, not a systematic review or citation-count analysis. “No established method” and “no independent replication identified” are bounded assessments of the material located, not proofs that no other report exists.
+Initial survey: **2026-10-23**. Last targeted search: **2026-10-25**, covering active MREIT groups, software, stimulation spectroscopy, scanner synchronization and open-data requirements. This is a curated research survey, not a systematic review or citation-count analysis. “No established method” and “no independent replication identified” are bounded assessments of the material located, not proofs that no other report exists.
+
+## 25 October software and platform audit
+
+Added nine papers, bringing the registry to 52. The [ecosystem audit](mreit-ecosystem.md) separates published software descriptions from verified downloads/releases and distinguishes injected-current MREIT from adjacent CTI/EPT work. No private project history was added as scientific evidence.
+
+Inspected SimNIBS 4.6.0 release metadata/tree and `calc_B` source, EPTlib metadata/README/license, ROAST metadata, DTU UQ thesis code documentation, official FSL-MRS documentation, Pulseq trigger/output source and CMRR's distribution page. These dependencies were not installed or executed. The MRCI/CoReHA download site was inaccessible. OSF GCU5B/DCWUN links were verified through papers but their file contents and licenses were not retrieved. The 2025 Copenhagen paper explicitly distinguishes public sub-study 3 code from reconstruction/optimization scripts available on request pending release.
+
+Searches included full method names to avoid acronym collisions with real-estate investment trusts, multi-resolution EIT and unrelated MRCDI repositories. Contemporary affiliations were checked through institution records; historical collaborators are not all assumed to remain at their paper-era institution. The Prisma hardware document is a proposed requirements/verification plan; no scanner, stimulator or sequence was operated.
 
 ## Search families
 

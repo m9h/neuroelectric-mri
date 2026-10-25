@@ -1,5 +1,7 @@
 # MREIT: a continuing field with a more specific role
 
+See the [25 October 2026 groups/software audit](mreit-ecosystem.md), [Prisma platform plan](prisma-platform.md) and [open-data contract](open-data.md) for the practical next steps.
+
 The 2005–2012 period was a major development era, but this survey does **not** establish a bibliometric peak. MREIT did not disappear. Its current relevance includes stimulation dosimetry, low-frequency tissue properties, and validation of volume-conductor models. Human current-field measurements have stronger practical evidence than spontaneous neuronal-current imaging.
 
 ## What the scanner measures

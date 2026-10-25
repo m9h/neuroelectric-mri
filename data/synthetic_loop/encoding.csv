@@ -1,0 +1,3 @@
+start_s,end_s,synthetic_current_A,ideal_sensitivity
+0,0.02,0.0001,1
+0.02,0.04,-0.0001,-1

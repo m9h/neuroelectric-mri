@@ -1,0 +1,48 @@
+# Who is working on MREIT, and what software can we use?
+
+Targeted update: **25 October 2026**. This is a map of verified recent activity, not a ranking or exhaustive census. Software was inspected through official documentation, release metadata and selected source files; it was not installed or experimentally validated here.
+
+## Active groups and related branches
+
+| Group | Evidence of continuing work | Relevance to this program |
+|---|---|---|
+| **Axel Thielscher, Lars G. Hanson, Teresa Cunha and collaborators, DTU / DRCMR, Copenhagen** | [Gregersen et al., 2024](https://doi.org/10.1162/imag_a_00176): human current-field measurements and head-model calibration. [Mosayebi-Samani et al., 2025](https://doi.org/10.1162/imag_a_00481): conductivity/anisotropy and reconstruction limitations. [Cunha et al., 2026](https://doi.org/10.1371/journal.pone.0341731): SMS acquisition. | Strong starting point for human MRCDI acquisition, SimNIBS integration and realistic validation. The 2024 and 2026 work used a Siemens Prisma 3 T. The 2026 experiment used an external cable loop, not through-head injection. |
+| **Rosalind Sadleir and collaborators, Arizona State**; recent papers include Saurav Z. K. Sajib, Munish Chauhan and Mason Manning | [2024 CTI versus DT-MREIT experiment](https://doi.org/10.1038/s41598-024-68551-z), [2025 diffusion-model comparison](https://doi.org/10.3389/fradi.2025.1492479), [2025 neural-network reconstruction conference report](https://doi.org/10.1109/ICEAA65662.2025.11306098). | Tensor conductivity, microstructure, functional MREIT and inverse modeling. The 2024 comparison involved a phantom and one human subject; the 2025 learning report is a short conference contribution, not a mature software release. |
+| **Cihan Göksu, İzmir Institute of Technology** | [Joined in February 2025](https://eee.iyte.edu.tr/en/our-new-faculty-member-dr-cihan-goksu/). The institution [announces a TÜBİTAK-funded project](https://eee.iyte.edu.tr/dr-ogr-uyesi-cihan-goksu-hocamizin-projesi-tubitak-tarafindan-kabul-edildi/) on generative-AI-assisted MR current-density imaging of tES currents. | Acquisition and current-source expertise from the Copenhagen/Tübingen collaboration, now a distinct research contact in İzmir. Funding establishes ongoing activity, not validated AI reconstruction performance. |
+| **Matej Kranjc and Igor Serša, University of Ljubljana / Jožef Stefan Institute** | Their [2025 experimental workshop](https://2025.ebtt.org/wp-content/uploads/2025/09/L10-EBTT2025_v2.pdf) teaches MREIT monitoring of electric fields during electroporation. | A continuing experimental MREIT community outside brain stimulation; useful for phantom, conductivity-change and equipment methods. |
+| **Korean conductivity-imaging lineage: Kyung Hee / Konkuk / Philips collaborators** | The historical Eung Je Woo, Hyung Joong Kim, Oh In Kwon and Nitish Katoch network produced the MRCI toolbox. [Ahn et al., 2026](https://doi.org/10.3389/fnagi.2026.1794175), including Oh-In Kwon, Jinseok Lee and Geon-Ho Jahng, reports CTI in cognitive impairment. | Continuing adjacent CTI/EPT work. This 2026 study uses diffusion and RF conductivity measurements, not injected-current MREIT; it should not be counted as a new brain MRCDI validation. |
+
+For a Prisma-centered program, prioritize the Copenhagen and Göksu acquisition lineages, and Sadleir's group for conductivity inversion and diffusion assumptions. No outreach has been undertaken.
+
+## Software: useful parts, incomplete integration
+
+| Component | Verified state | Recommended role and limits |
+|---|---|---|
+| **[SimNIBS](https://github.com/simnibs/simnibs)** | Release **4.6.0**, 3 March 2026. Official [`calc_B`](https://simnibs.github.io/simnibs/build/html/documentation/command_line/calc_b.html) computes the magnetic field of simulated tES current density. | Primary anatomical FEM reference: segmentation, meshes, E/J fields, conductivity variation, then magnetic-field prediction. It does not by itself simulate the MRI acquisition or prove a conductivity inversion is identifiable. |
+| **Copenhagen reconstruction/optimization scripts** | The [2025 paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC12319980/) says the MR reconstruction and conductivity-optimization scripts are available on request pending a SimNIBS release. Sub-study 3 scripts/data are linked at [OSF GCU5B](https://doi.org/10.17605/OSF.IO/GCU5B). | Obtain the actual study implementation before reinventing it. In the inspected SimNIBS 4.6.0 tree/documentation, no clearly documented turnkey raw-MR-phase-to-conductivity workflow was identified. This is a bounded inspection, not proof that no implementation exists. |
+| **[MRCI toolbox](https://doi.org/10.1109/TBME.2017.2732502)** | Published 2017; 11 MATLAB functions and example experimental datasets for MRCDI, MREIT, DT-MREIT and CTI. | Valuable algorithm reference. Its [original download site](http://iirc.khu.ac.kr/software.html) could not be accessed in this audit. Current availability, licensing and compatibility need confirmation from the authors. |
+| **[CoReHA 2.0](https://doi.org/10.1155/2013/941745)** | Published 2013; Windows C++/MFC/OpenGL application covering preprocessing and harmonic-Bz conductivity reconstruction. | Historical reference. No maintained current distribution was verified; do not choose it as the foundation of a new portable platform without a source/license audit. |
+| **[MSc_UQ_in_MREIT](https://github.com/KennethScheel/MSc_UQ_in_MREIT)** | MIT-licensed DTU thesis code; repository last push 7 February 2023. README says only two example problems are included. | Useful small inverse-problem/UQ examples with Babak Maboudi Afkham and Kim Knudsen. Not a maintained clinical pipeline. |
+| **[ROAST](https://github.com/andypotatohy/roast)** | Public GPL-3.0 MATLAB tES forward-modeling code; repository activity observed in October 2026. | An independent E-field modeling comparator. Additional magnetic-field, MR encoding and inversion code is needed for MREIT. |
+| **[EIDORS](https://eidors3d.sourceforge.net/)** | Version 3.12 released 29 December 2024; MATLAB/Octave EIT forward/inverse tools. | Reusable inverse-problem ideas and FEM checks. Its conventional electrode-voltage measurement model is not the MR Bz measurement operator. |
+| **[EPTlib](https://github.com/EPTlib/eptlib)** | C++ RF electrical-properties reconstruction library; MIT license verified in source. Latest tagged release inspected: 0.4.9, December 2023; repository push activity in September 2026. | Useful for the RF-conductivity side of CTI comparisons. RF conductivity is not interchangeable with low-frequency conductivity. |
+| **[FSL-MRS](https://pages.fmrib.ox.ac.uk/fsl/fsl_mrs/)** | Current documentation 2.5.0; [`fsl_mrsi`](https://pages.fmrib.ox.ac.uk/fsl/fsl_mrs/fitting.html) fits spectroscopy images and exports concentrations and QC maps. | Metabolic-response analysis. Whole-brain reconstruction, lipid suppression and acquisition-specific preprocessing remain separate responsibilities. Clarke, **Stagg** and Jbabdi authored its [2021 paper](https://doi.org/10.1002/mrm.28630). |
+
+The SimNIBS release tree was inspected at `7059ef0b96a65fb02e2a84652ace14585f60c9fe`, including `simnibs/cli/calc_B.py`, and the documented magnetic-field and generalized-polynomial-chaos components. Repository activity and a release date are maintenance signals, not evidence of correctness. An unlicensed small GitHub script collection found by acronym search was not promoted to a recommended dependency.
+
+## Existing data worth benchmarking
+
+| Source | What is advertised | Access boundary |
+|---|---|---|
+| [Mosayebi-Samani 2025, OSF GCU5B](https://doi.org/10.17605/OSF.IO/GCU5B) | Scripts and data for sub-study 3, the DT-MREIT reconstruction evaluation | Link verified in the paper; OSF file retrieval/license not verified here. Other human sub-studies are restricted. |
+| [Cunha 2026, OSF DCWUN](https://doi.org/10.17605/OSF.IO/DCWUN) | SMS current-field phantom data | Link verified in the paper; OSF file retrieval/license not verified here. Human data restricted. |
+| [Sajib 2024](https://doi.org/10.1038/s41598-024-68551-z) | Data in the ASU Research Data Repository, searchable by title/DOI | The section labeled code availability describes datasets; a complete code release was not established. |
+| [Sajib 2021](https://doi.org/10.1371/journal.pone.0254690) | Human data under NIMH NDA collection C2750; phantom data at a linked demo Dataverse | Paper availability statement only. Verify permissions and persistence, especially the demo repository, before depending on it. |
+
+## Connecting current measurements to spectroscopy
+
+A useful joint experiment asks two questions: **where did the electrical exposure go, and how did tissue respond?** MRCDI constrains the field model; MRSI measures metabolite changes. Myo-inositol is a plausible response measure, but requires its own response model and cannot be assumed proportional to current density.
+
+[Rango et al. (2008)](https://doi.org/10.1002/mrm.21709) reported regional myo-inositol increases after tDCS in a small study with five stimulated/sham participants and five unstimulated controls. This is a published precedent for the metabolic endpoint, not a calibrated whole-brain electrical dosimeter.
+
+Our proposed analysis would compare an MRCDI-constrained distribution of E/J with longitudinal, tissue-corrected MRSI metabolite estimates, preserving uncertainty in both. Test exposure magnitude, orientation and time course as separate hypotheses. Sham, current-off, drift and spectral-quality controls belong in the model. This extends the [simulation roadmap](simulation-roadmap.md) toward stimulation dose–response research.

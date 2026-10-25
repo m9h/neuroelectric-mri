@@ -1,6 +1,6 @@
 # Annotated reading list
 
-Generated from [sources.json](../references/sources.json); checked 2026-10-23.
+Generated from [sources.json](../references/sources.json); checked 2026-10-25.
 
 Evidence descriptions characterize individual studies, not field-wide validation.
 
@@ -104,6 +104,16 @@ Direct historical link between POSSUM and neuronal-current timing studies. **Lim
 
 Verification: Official proceedings PDF.
 
+## rango2008 — 2008 — stimulation MRS
+
+**[Myoinositol content in the human brain is modified by transcranial direct current stimulation in a matter of minutes: A 1H-MRS study](https://doi.org/10.1002/mrm.21709)**. Rango, M. and Cogiamanian, F. and Marceglia, S. and Barberis, B. and Arighi, A. and Biondetti, P. and Priori, A.. *Magnetic Resonance in Medicine*.
+
+Status: **published** · Evidence: small human metabolic-response study.
+
+Reports regional myo-inositol changes after tDCS; relevant to pairing electrical dosimetry with metabolic imaging. **Limit:** Five stimulated/sham participants and five unstimulated controls; a metabolic response is not a calibrated current-density measurement.
+
+Verification: Publisher metadata and abstract inspected 2026-10-25.
+
 ## woo2008 — 2008 — MREIT
 
 **[Magnetic resonance electrical impedance tomography (MREIT) for high-resolution conductivity imaging](https://pubmed.ncbi.nlm.nih.gov/18799834/)**. Woo, Eung Je and Seo, Jin Keun. *Physiological Measurement*.
@@ -144,6 +154,16 @@ Explains the move toward internal magnetic data and Bz-based reconstruction. **L
 
 Verification: Publisher abstract and metadata.
 
+## jeon2013 — 2013 — MREIT software
+
+**[CoReHA 2.0: A Software Package for In Vivo MREIT Experiments](https://pmc.ncbi.nlm.nih.gov/articles/PMC3595674/)**. Jeon, Kiwan and Lee, Chang-Ock. *Computational and Mathematical Methods in Medicine*.
+
+Status: **published** · Evidence: software methods.
+
+Windows reconstruction environment for preprocessing and harmonic-Bz conductivity imaging. **Limit:** Current downloadable distribution, maintenance and source licensing not verified.
+
+Verification: Primary paper text indexed from PMC and publisher PDF inspected 2026-10-25.
+
 ## sundaram2016 — 2016 — ncMRI
 
 **[Direct neural current imaging in an intact cerebellum with magnetic resonance imaging](https://pmc.ncbi.nlm.nih.gov/articles/PMC4873157/)**. Sundaram, Padmavathi and Nummenmaa, Aapo and Wells, William and Orbach, Darren and Orringer, Daniel and Mulkern, Robert and Okada, Yoshio. *NeuroImage*.
@@ -163,6 +183,16 @@ Status: **published** · Evidence: in vitro Aplysia ganglia.
 Activity-related phase variability depends on the imaging-current condition. **Limit:** Conductivity-probing mechanism, not passive human current imaging.
 
 Verification: PubMed abstract and indexed PMC methods/conclusions.
+
+## sajib2017 — 2017 — MREIT software
+
+**[Software Toolbox for Low-Frequency Conductivity and Current Density Imaging Using MRI](https://pubmed.ncbi.nlm.nih.gov/28767360/)**. Sajib, Saurav Z. K. and Katoch, Nitish and Kim, Hyung Joong and Kwon, Oh In and Woo, Eung Je. *IEEE Transactions on Biomedical Engineering*.
+
+Status: **published** · Evidence: MATLAB toolbox and example datasets.
+
+MRCI implements 11 functions covering MRCDI, MREIT, DT-MREIT and CTI. **Limit:** Original download site inaccessible during this audit; a publication does not establish present support or usable licensing.
+
+Verification: PubMed abstract and author institution records inspected 2026-10-25; download attempted.
 
 ## chauhan2018 — 2018 — DT-MREIT
 
@@ -214,6 +244,16 @@ Steady-state preparation improves the ULF field-sensing approach. **Limit:** No 
 
 Verification: Author-hosted MGH PDF and bibliographic metadata.
 
+## clarke2021 — 2021 — MRS software
+
+**[FSL-MRS: An end-to-end spectroscopy analysis package](https://pmc.ncbi.nlm.nih.gov/articles/PMC7116822/)**. Clarke, William T. and Stagg, Charlotte J. and Jbabdi, Saad. *Magnetic Resonance in Medicine*.
+
+Status: **published** · Evidence: spectroscopy analysis software.
+
+Open spectroscopy fitting and quantification tools support MRSI metabolic-response analysis and uncertainty estimates. **Limit:** Does not reconstruct conductivity or solve all acquisition-specific whole-brain MRSI preprocessing problems.
+
+Verification: Paper metadata and official FSL-MRS 2.5.0 documentation inspected 2026-10-25; software not run.
+
 ## goksu2021 — 2021 — MRCDI
 
 **[Sensitivity and resolution improvement for in vivo magnetic resonance current-density imaging of the human brain](https://onlinelibrary.wiley.com/doi/abs/10.1002/mrm.28944)**. Göksu, Cihan and others. *Magnetic Resonance in Medicine*.
@@ -223,6 +263,16 @@ Status: **published** · Evidence: human acquisition improvement.
 Improves sensitivity and resolution for stimulation-induced fields. **Limit:** Sensitivity refers to a particular acquisition and averaging budget.
 
 Verification: Publisher abstract and metadata.
+
+## gregersen2021 — 2021 — MRCDI equipment
+
+**[Safety evaluation of a new setup for transcranial electric stimulation during magnetic resonance imaging](https://www.drcmr.dk/images/12042021_Safety_evaluation_of_a_new_setup_for_TES_during_MRI.pdf)**. Gregersen, Fróði and Göksu, Cihan and Schaefers, Gregor and Xue, Rong and Thielscher, Axel and Hanson, Lars G.. *Brain Stimulation*.
+
+Status: **published** · Evidence: configuration-specific simulation and equipment evaluation.
+
+Studies low-conductivity leads and RF coupling in an MR stimulation setup, with electrode concerns remaining relevant. **Limit:** Results cannot be transferred to another lead path, coil, scanner sequence or human-use configuration without appropriate assessment.
+
+Verification: Author-hosted paper and institutional metadata inspected 2026-10-25.
 
 ## hofner2021 — 2021 — ULF-dcNCI
 
@@ -243,6 +293,16 @@ Status: **published** · Evidence: animal MRI and slice optical comparison.
 Supports a rapid neuromorphological component of diffusion-functional contrast. **Limit:** Adjacent activity-sensitive contrast, not a direct current measurement.
 
 Verification: Publisher article abstract and metadata.
+
+## sajib2021 — 2021 — DT-MREIT
+
+**[Magnetic-resonance-based measurement of electromagnetic fields and conductivity in vivo using single current administration—A machine learning approach](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0254690)**. Sajib, Saurav Z. K. and Chauhan, Munish and Kwon, Oh In and Sadleir, Rosalind J.. *PLOS ONE*.
+
+Status: **published** · Evidence: phantom and human algorithm study.
+
+Combines mimetic reconstruction and learned information for single-current conductivity tensor inference. **Limit:** Agreement with two-current reconstructions is not independent absolute conductivity ground truth; training assumptions remain important.
+
+Verification: Publisher abstract, methods passages and data-availability statement inspected 2026-10-25.
 
 ## toi2022 — 2022 — DIANA
 
@@ -334,6 +394,16 @@ Neural activity was neither necessary nor sufficient for the observed DIANA-like
 
 Verification: PubMed metadata and abstract; official ISMRM abstract.
 
+## sajib2024 — 2024 — CTI / DT-MREIT
+
+**[Validation of conductivity tensor imaging against diffusion tensor magnetic resonance electrical impedance tomography](https://pmc.ncbi.nlm.nih.gov/articles/PMC11297941/)**. Sajib, S. Z. K. and Chauhan, M. and Sahu, S. and Boakye, E. and Sadleir, R. J.. *Scientific Reports*.
+
+Status: **published** · Evidence: phantom and one-human comparison.
+
+Compares electrode-based and electrodeless conductivity estimates and identifies processing dependencies. **Limit:** Limited human sample; shared assumptions and CTI-derived boundary assignments complicate claims of independent absolute validation.
+
+Verification: PMC full text, methods and availability statement inspected 2026-10-25.
+
 ## capiglioni2025 — 2025 — SIRS
 
 **[Stimulus-induced rotary saturation imaging of visually evoked response: A pilot study](https://pmc.ncbi.nlm.nih.gov/articles/PMC11602267/)**. Capiglioni, Milena and others. *NMR in Biomedicine*.
@@ -364,6 +434,16 @@ Questions how much brain anisotropy can be identified from these measurements. *
 
 Verification: PubMed abstract and indexed PMC results.
 
+## sadleir2025 — 2025 — DT-MREIT
+
+**[Deep Learning-Enabled Reconstruction of Electrical Conductivity and Transcranial Electromagnetic Field Distributions](https://ieeexplore.ieee.org/document/11306098/)**. Sadleir, Rosalind J. and Sajib, Saurav Z. K. and Manning, Mason. *International Conference on Electromagnetics in Advanced Applications*.
+
+Status: **published** · Evidence: short conference method report.
+
+Reports synthetic-data-trained reconstruction for a single off-plane applied current. **Limit:** Not a mature publicly validated reconstruction platform; comparison errors are relative to conventional reconstructions.
+
+Verification: IEEE abstract and ASU publication metadata inspected 2026-10-25.
+
 ## toiretraction2025 — 2025 — DIANA
 
 **[Retraction](https://pubmed.ncbi.nlm.nih.gov/40997196/)**. Toi, Phan Tan and Jang, Hyun Jae and Min, Kyeongseon and Kim, Sung-Phil and Lee, Seung-Kyun and Lee, Jongho and Kwag, Jeehyun and Park, Jang-Yeon. *Science*.
@@ -373,6 +453,16 @@ Status: **retraction notice** · Evidence: formal publication status.
 Retracts the 2022 article, DOI 10.1126/science.abh4340, on 2025-09-25. **Limit:** Keep original and notice linked in bibliographies.
 
 Verification: PubMed metadata and RetractionOf linkage; Science direct page inaccessible.
+
+## ahn2026 — 2026 — CTI
+
+**[Evaluation of conductivity tensor image along the perivascular space in the brains of patients with cognitive impairments](https://pmc.ncbi.nlm.nih.gov/articles/PMC13162331/)**. Ahn, Jehyeuk and others. *Frontiers in Aging Neuroscience*.
+
+Status: **published** · Evidence: 110-participant exploratory cross-sectional study.
+
+Shows continuing Korean CTI work using diffusion and RF conductivity; evaluates a conductivity-based ALPS index. **Limit:** No injected-current MREIT; conductivity-index group differences were not significant and clinical associations were weaker than DTI-ALPS.
+
+Verification: PMC metadata, affiliations and abstract inspected 2026-10-25.
 
 ## capiglioni2026 — 2026 — spin-lock
 

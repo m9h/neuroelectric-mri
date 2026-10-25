@@ -1,0 +1,53 @@
+{
+  "schema": "neuroelectric-mri.synthetic-loop/0.1",
+  "data_kind": "synthetic_analytical",
+  "description": "Closed square loop, free-space thin-wire field; ideal refocused phase",
+  "geometry": {
+    "vertices_m": [
+      [
+        -0.05,
+        -0.05,
+        0
+      ],
+      [
+        0.05,
+        -0.05,
+        0
+      ],
+      [
+        0.05,
+        0.05,
+        0
+      ],
+      [
+        -0.05,
+        0.05,
+        0
+      ]
+    ],
+    "closure": "last vertex to first",
+    "frame": "right-handed synthetic scanner Cartesian",
+    "b0_unit_vector": [
+      0,
+      0,
+      1
+    ]
+  },
+  "phase_convention": "-gamma integral q(t) B_parallel(t) dt; signal Mx+iMy",
+  "time_origin": "ideal transverse excitation at t=0; acquisition endpoint t=0.04 s",
+  "current_delay_s": 0.0001,
+  "gamma_rad_s_T": 267522189.96689257,
+  "mu0_H_m": 1.2566370614359173e-06,
+  "measured_current_available": false,
+  "scanner_data_available": false,
+  "limitations": [
+    "No conductive tissue or conductivity inversion",
+    "No RF/gradient/ADC simulation",
+    "No noise, voxel averaging, relaxation, hardware or scanner validation"
+  ],
+  "files_sha256": {
+    "encoding.csv": "9ba2e707c7529eb4a8ca634b0e04073d3b0f4422905da73274612613571da939",
+    "field_phase.csv": "fefe9c86f799f6d1934962c23566af334de790cd908ef97385dd060794c27f74"
+  },
+  "generator_sha256": "068f3dc02fe279d2568d15dfcc185d1e70709e4876f0995a29ad7d0689cbe086"
+}

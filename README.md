@@ -5,13 +5,13 @@
 # 🧠 Neuroelectric MRI
 
 <p>
-  <a href="docs/reading-list.md"><img src="https://img.shields.io/badge/annotated_sources-43-16a6a0?style=flat-square" alt="43 annotated sources"></a>
+  <a href="docs/reading-list.md"><img src="https://img.shields.io/badge/annotated_sources-52-16a6a0?style=flat-square" alt="52 annotated sources"></a>
   <a href="docs/methods.md"><img src="https://img.shields.io/badge/literature-October_2026-8b75e8?style=flat-square" alt="Literature through October 2026"></a>
   <a href="docs/simulation-roadmap.md"><img src="https://img.shields.io/badge/simulation-POSSUM_%E2%86%92_SBI-e6a24b?style=flat-square" alt="Simulation: POSSUM to SBI"></a>
   <a href="examples/phase_budget.py"><img src="https://img.shields.io/badge/Python-3.10%2B-4285c5?style=flat-square" alt="Python 3.10 or newer"></a>
 </p>
 
-**A research map and simulation workbench for neuronal-current MRI, MR current-density imaging, and electrical conductivity imaging.** Literature checked through **23 October 2026**.
+**A research map and simulation workbench for neuronal-current MRI, MR current-density imaging, and electrical conductivity imaging.** Initial literature survey: **23 October 2026**; MREIT software and platform update: **25 October 2026**.
 
 **[History](docs/history.md) · [Current evidence](docs/methods.md) · [MREIT](docs/mreit.md) · [Simulation roadmap](docs/simulation-roadmap.md) · [Reading list](docs/reading-list.md)**
 
@@ -37,6 +37,17 @@ Several developments change the assessment today:
 - **MREIT/MRCDI:** human field measurements, conductivity-model fitting, and acquisition improvements continued well beyond the 2000s. [2024 model calibration](https://doi.org/10.1162/imag_a_00176), [2026 SMS acquisition study](https://doi.org/10.1371/journal.pone.0341731)
 - **POSSUM is directly relevant:** its time-varying-field extension already explored current-induced MRI effects. [Drobnjak, Pell & Jenkinson, 2010](https://doi.org/10.1016/j.mri.2010.03.029)
 
+## 🛠️ Building an open MREIT platform
+
+Our proposed experimental starting point is a **Siemens Prisma 3 T**, connecting validated current/conductivity models, synchronized phantom measurements, and openly reproducible datasets.
+
+| 🟢 Research community | 🟣 Scanner and equipment | 🟠 Open benchmarks |
+|---|---|---|
+| [Active groups and software audit](docs/mreit-ecosystem.md) | [Prisma program and Siemens technical brief](docs/prisma-platform.md) | [Open-data contract](docs/open-data.md) |
+| SimNIBS, MRCI, CoReHA, CTI and MRSI | Scanner triggers, external gating, current monitoring and verification | Geometry, raw complex data, waveforms, clocks, provenance and null controls |
+
+**Implemented:** analytical closed-loop magnetic fields and refocusing-aware timing examples, with 19 numerical tests across the workbench. **Planned:** tissue conductivity inversion, scanner sequences, equipment and measured datasets. The checked-in [75-point reference fixture](data/synthetic_loop/manifest.json) is explicitly synthetic.
+
 ## 🕰️ The historical thread
 
 **Jinhu Xiong, Peter T. Fox, and Jia-Hong Gao's 2003 paper**, “Directly mapping magnetic field effects of neuronal activity by magnetic resonance imaging,” introduced the influential **magnetic-source MRI / msMRI** claim from the University of Texas Health Science Center at San Antonio. It was an early prominent report, preceded by other proposals and experiments. [Paper](https://doi.org/10.1002/hbm.10124)
@@ -50,28 +61,33 @@ The history connects this work to **Bodurka, Petridou and Bandettini**, biologic
 | [History](docs/history.md) | San Antonio, Bandettini, early claims and later developments |
 | [Methods and present evidence](docs/methods.md) | Names, mechanisms, evidence boundaries, current approaches |
 | [MREIT and conductivity](docs/mreit.md) | What survived, functional MREIT, DT-MREIT and EPT distinctions |
+| [MREIT groups and software](docs/mreit-ecosystem.md) | Recent activity, software availability, datasets and MRSI connection |
+| [Prisma platform](docs/prisma-platform.md) | Modeling milestones, equipment requirements, synchronization and Siemens brief |
+| [Open-data contract](docs/open-data.md) | Raw data, geometry, clocks, calibration and reproducibility |
 | [Simulation roadmap](docs/simulation-roadmap.md) | Inspected sbi4dwi code, missing physics, concrete benchmarks |
 | [Annotated reading list](docs/reading-list.md) | Study-level findings and limitations |
 | [Search record](docs/search-log.md) | Search scope, dates, access limits and update procedure |
 | [Source registry](references/sources.json) | Machine-readable bibliography and evidence annotations |
 | [BibTeX](references/references.bib) / [CSV](references/literature.csv) | Citation-manager and spreadsheet exports |
 | [Phase-budget example](examples/phase_budget.py) | Executable sanity checks for field-to-phase sensitivity |
+| [Current-phantom benchmark](examples/current_phantom.py) | Closed-loop fields, signed encoding and timing perturbations |
 
 ## 🏷️ Why this name?
 
 `neuroelectric-mri` is a useful umbrella: it accommodates endogenous current detection, injected-current calibration, and tissue conductivity without declaring any contested technique successful. The conventional narrow literature term is **neuronal-current MRI (ncMRI)**. Alternative repository names are `neuronal-current-mri` for a narrower survey or `bioelectric-mri` for eventual cardiac and peripheral-nerve coverage. NEMO, NAMO, and DIANA already identify particular methods and would make confusing umbrella names.
 
-## ⚡ Run the phase-budget example
+## ⚡ Run the analytical benchmarks
 
 Python 3.10+; standard library only:
 
 ```sh
 python3 examples/phase_budget.py
 python3 examples/phase_budget.py --csv data/phase_budget.csv
+python3 examples/current_phantom.py --output data/synthetic_loop
 python3 -m unittest discover -s tests -v
 python3 scripts/build_references.py --check
 ```
 
-The example computes ideal phase budgets and exact cancellation cases. It is **not** a neuronal-current simulator, an MREIT reconstruction, or a reproduction of a published experiment. The larger simulator is a proposed roadmap. No changes to sbi4dwi are required to run this repository.
+The examples compute ideal phase budgets, closed-wire-loop fields, cancellation cases and timing-dependent phase errors. They do not implement tissue conductivity reconstruction or reproduce an acquired experiment. The larger simulator and measurement platform are proposed roadmaps. No changes to sbi4dwi are required to run this repository.
 
 For a research program, start with calibrated current phantoms and artifact controls; then test whether plausible neural sources remain identifiable after voxel averaging, acquisition, and nuisance variability. Simulation-based inference becomes useful once this forward problem and its null cases are credible.
