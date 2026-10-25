@@ -1,6 +1,6 @@
-# A simulation program tied to sbi4dwi
+# A simulation program tied to sbi4dwi and mrs-jax
 
-This is a proposed research program, informed by a read-only source audit. The repository currently implements only the small analytical phase-budget example. No experimental result has been reproduced here.
+This is a proposed research program, informed by read-only source audits. This repository implements analytical phase-budget and closed-loop current/timing benchmarks. The separate **mrs-jax** repository already contains MRSI/EPSI simulation prototypes; see the [pinned implementation audit and test results](mrs-jax-integration.md). No acquired MREIT result has been reproduced here.
 
 ## The historical benchmark is already unusually close
 
@@ -29,6 +29,8 @@ Audit date: 2026-10-23. sbi4dwi revision: `c6f35852f82d74beefaf4676a886640c2d4eb
 The nearby `neurojax/src/neurojax/geometry/bem.py` inspected here contains MNE/FreeSurfer geometry and coregistration helpers. That file alone is not a verified neural-current-to-MRI magnetic forward solver. A proper FEM/BEM or compartmental magnetic-field calculation must be identified and validated separately.
 
 ## Proposed forward chain
+
+For stimulation-response spectroscopy, reuse mrs-jax's concentration maps, basis FIDs and spatial encoding. It needs a time-dependent field/phase-history interface and actual EPSI ADC timing before it can model current-induced readout effects. Keep direct current-field contrast and downstream metabolite changes as separate model parameters. FSL-MRS remains a useful independent basis/fitting reference. The [integration plan](mrs-jax-integration.md) identifies existing entry points and gaps.
 
 ```mermaid
 flowchart LR

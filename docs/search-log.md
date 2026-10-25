@@ -10,6 +10,8 @@ Inspected SimNIBS 4.6.0 release metadata/tree and `calc_B` source, EPTlib metada
 
 Searches included full method names to avoid acronym collisions with real-estate investment trusts, multi-resolution EIT and unrelated MRCDI repositories. Contemporary affiliations were checked through institution records; historical collaborators are not all assumed to remain at their paper-era institution. The Prisma hardware document is a proposed requirements/verification plan; no scanner, stimulator or sequence was operated.
 
+Follow-up: inspected m9h/mrs-jax at commit `3220889281da83f49c618cc5cc623fb6b56b3a33` after its omission from the initial software audit was identified. Retrieved source read-only and ran three upstream simulation test files from a temporary snapshot: 18 passed, 5 skipped for unavailable WAND/ISMRM data. Additional small runtime checks covered gradients, reconstruction input mutation and short-basis behavior. The [audit](mrs-jax-integration.md) distinguishes implemented prototypes from stale README roadmap entries and revises the spectroscopy development plan around mrs-jax. No mrs-jax source changes or full-suite validation were performed.
+
 ## Search families
 
 - `neuronal current MRI`, `neural current imaging`, `ncMRI`, `NCI`, `magnetic source MRI`, `msMRI`.

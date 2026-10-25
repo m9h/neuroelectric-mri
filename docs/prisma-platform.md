@@ -26,6 +26,8 @@ For passive quasistatic tissue, solve `div(sigma grad u) = 0`, `E = -grad u`, an
 
 Use **SimNIBS as a reference anatomical solver** and an independent analytic or FEM implementation for checks. Connect this to the proposed sbi4dwi/Bloch development through a versioned field/time interface. Preserve complex data and coherent nuisance fields. Keep RF-frequency CTI inputs distinct from injected-current low-frequency conductivity. An SBI posterior must include electrode/contact uncertainty, waveform and timing error, field-model discrepancy and acquisition noise; neural-network output alone does not establish identifiability.
 
+Use **mrs-jax as the spectroscopy simulation and processing development base**: it already has metabolite maps, MRSI/EPSI kernels and a Siemens TWIX reader. The [code audit](mrs-jax-integration.md) identifies the differentiable entry point and the extensions needed for time-varying fields, actual sample timing and quantitative myo-inositol recovery. Share geometry and measured timing with the MRI field model while keeping the metabolic-response parameters distinct. Retain FSL-MRS as a reference/complementary fitter.
+
 ## Milestones with measurable exit criteria
 
 | Milestone | Deliverable | Exit evidence |

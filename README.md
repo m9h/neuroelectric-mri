@@ -62,6 +62,7 @@ The history connects this work to **Bodurka, Petridou and Bandettini**, biologic
 | [Methods and present evidence](docs/methods.md) | Names, mechanisms, evidence boundaries, current approaches |
 | [MREIT and conductivity](docs/mreit.md) | What survived, functional MREIT, DT-MREIT and EPT distinctions |
 | [MREIT groups and software](docs/mreit-ecosystem.md) | Recent activity, software availability, datasets and MRSI connection |
+| [mrs-jax integration](docs/mrs-jax-integration.md) | Existing MRSI/EPSI code, targeted runtime checks and the spectroscopy development plan |
 | [Prisma platform](docs/prisma-platform.md) | Modeling milestones, equipment requirements, synchronization and Siemens brief |
 | [Open-data contract](docs/open-data.md) | Raw data, geometry, clocks, calibration and reproducibility |
 | [Simulation roadmap](docs/simulation-roadmap.md) | Inspected sbi4dwi code, missing physics, concrete benchmarks |
