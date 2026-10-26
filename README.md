@@ -46,7 +46,9 @@ Our proposed experimental starting point is a **Siemens Prisma 3 T**, connecting
 | [Active groups and software audit](docs/mreit-ecosystem.md) | [Prisma program and Siemens technical brief](docs/prisma-platform.md) | [Open-data contract](docs/open-data.md) |
 | SimNIBS, MRCI, CoReHA, CTI and MRSI | Scanner triggers, external gating, current monitoring and verification | Geometry, raw complex data, waveforms, clocks, provenance and null controls |
 
-**Implemented:** analytical closed-loop fields, refocusing-aware timing, and a [six-control current/MRSI benchmark](data/synthetic_mrs_current/README.md) using mrs-jax, with 22 workbench tests when its simulation dependency is installed. **Next:** conductivity forward benchmarks, realistic spectroscopy validation, bench timing, Prisma phantom measurements, then independent reproduction. See the [implementation roadmap](docs/implementation-roadmap.md). Both checked-in datasets are synthetic.
+**Implemented:** analytical closed-loop fields, refocusing-aware timing, a [six-control current/MRSI benchmark](data/synthetic_mrs_current/README.md), and a [3D conductive-tank reference](data/synthetic_tank/README.md) with conservation, power and mesh-convergence checks. The complete workbench has 37 tests. The tank was developed through [recorded red–green TDD cycles](docs/tdd-conductive-tank.md). **Next:** finite electrodes/contact impedance, independent FEM comparison and complete-circuit magnetic fields, alongside realistic spectroscopy validation. See the [implementation roadmap](docs/implementation-roadmap.md). All checked-in datasets are synthetic.
+
+![Synthetic tank potential, current density and convergence](data/synthetic_tank/summary.png)
 
 ## 🕰️ The historical thread
 
@@ -74,6 +76,8 @@ The history connects this work to **Bodurka, Petridou and Bandettini**, biologic
 | [Phase-budget example](examples/phase_budget.py) | Executable sanity checks for field-to-phase sensitivity |
 | [Current-phantom benchmark](examples/current_phantom.py) | Closed-loop fields, signed encoding and timing perturbations |
 | [Current/MRSI benchmark](data/synthetic_mrs_current/README.md) | Six controls separating injected phase and concentration; raw complex synthetic data |
+| [Conductive-tank reference](docs/conductive-tank.md) | Scalar finite-volume solver, fixed-current plates, field/flux conventions and analytical checks |
+| [Tank TDD record](docs/tdd-conductive-tank.md) | Failing-test and passing-implementation commits, including a diagnostic regression |
 
 ## 🏷️ Why this name?
 
@@ -91,14 +95,15 @@ python3 -m unittest discover -s tests -v
 python3 scripts/build_references.py --check
 ```
 
-The standard-library examples compute ideal phase budgets, closed-wire-loop fields, cancellation cases and timing-dependent phase errors. The three spectroscopy integration tests skip if mrs-jax is unavailable. To run the complete workbench and regenerate its current/MRSI fixture:
+The standard-library examples compute ideal phase budgets, closed-wire-loop fields, cancellation cases and timing-dependent phase errors. Spectroscopy tests skip if mrs-jax is unavailable; tank tests skip if NumPy/SciPy are unavailable. To run the complete workbench and regenerate its numerical fixtures:
 
 ```sh
 python -m pip install -r requirements-simulation.txt
 python examples/mrs_current_benchmark.py --output /tmp/synthetic-mrs-current
+python examples/tank_benchmark.py --output /tmp/synthetic-tank --plot
 python -m unittest discover -s tests -v
 ```
 
-The workbench does not implement tissue conductivity reconstruction or reproduce an acquired experiment. No changes to sbi4dwi are required.
+For just the tank solver, install `requirements-tank.txt`; matplotlib is optional for its figure. The workbench does not perform conductivity inversion or reproduce an acquired experiment. No changes to sbi4dwi are required.
 
 For a research program, start with calibrated current phantoms and artifact controls; then test whether plausible neural sources remain identifiable after voxel averaging, acquisition, and nuisance variability. Simulation-based inference becomes useful once this forward problem and its null cases are credible.

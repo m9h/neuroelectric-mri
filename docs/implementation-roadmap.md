@@ -1,6 +1,6 @@
 # Implementation roadmap: models → instruments → open measurements
 
-Updated **25 October 2026**. Scanner target: **Siemens Prisma 3 T**, with WIPs and a route to Siemens development. Progress is gated by evidence, not by a promised calendar date. The detailed physical acquisition gates remain in the [Prisma specification](prisma-platform.md).
+Updated **26 October 2026**. Scanner target: **Siemens Prisma 3 T**, with WIPs and a route to Siemens development. Progress is gated by evidence, not by a promised calendar date. The detailed physical acquisition gates remain in the [Prisma specification](prisma-platform.md).
 
 ## Stage 1 — A verified current/spectroscopy simulation bridge
 
@@ -12,11 +12,11 @@ The benchmark combines this repository's closed-loop field model with mrs-jax. I
 
 ## Stage 2 — Conductivity and complete-circuit field benchmarks
 
-This is the next main MREIT software work package. Start with a homogeneous conductive tank and specified electrode boundary conditions, then add an inclusion, contact impedance and anisotropy. Preserve the full return path and scanner-frame transformation. Use SimNIBS as an anatomical reference and an independent analytical/numerical implementation for the small geometries.
+**First tank milestone delivered:** a [3D conservative scalar-conductivity solver](conductive-tank.md), homogeneous/layered/inclusion controls, fixed-current plates, E/J and face-current export, power balance, and nonlinear analytical convergence. Its [red–green TDD record](tdd-conductive-tank.md) retains the failing and passing commits. The complete workbench now passes 37 tests with all dependencies present. Finite electrodes, contact impedance, anisotropy and complete-circuit magnetic fields remain open. Use SimNIBS as an anatomical reference and retain independent analytical checks for small geometries.
 
 Deliver versioned geometry, conductivity, electrodes, mesh, E/J/B fields and convergence reports. Require charge conservation, mesh convergence, polarity/orientation checks and agreement with independent solutions. Only then add conductivity inference; hold out geometries and injection patterns, and show cases where B-parallel data cannot identify the requested parameters. sbi4dwi supplies candidate microstructure priors and inference components after these forward checks.
 
-The **first concrete next coding ticket** is a homogeneous-tank forward benchmark with an analytical potential/current-density solution, a conservative discretization and mesh-convergence output. A closed wire loop alone cannot validate tissue conductivity.
+The **next coding ticket** is finite electrode patches/contact impedance with independent FEM comparison. Then specify outgoing and return leads and compare the complete magnetic field with analytical limits before connecting tank J to MR encoding. The current scalar tank deliberately exports no B field. Its fixed-current conductivity-scaling null is retained as an identifiability check for later inversion.
 
 ## Stage 3 — Measured timing and current, before the scanner
 
@@ -40,7 +40,7 @@ Freeze the analysis and test a new session and independent site/configuration. E
 
 | Repository/component | Responsibility | Present status |
 |---|---|---|
-| **neuroelectric-mri** | Literature, conventions, physical references, integration benchmarks, data contracts and scanner requirements | Analytical references and six-control synthetic MRSI benchmark implemented |
+| **neuroelectric-mri** | Literature, conventions, physical references, integration benchmarks, data contracts and scanner requirements | Analytical references, synthetic MRSI benchmark and scalar tank solver with convergence/null controls implemented |
 | **mrs-jax** | Spectroscopy phantoms, forward models, processing and phase/timing support | Implementation on `feature/current-encoding`; [PR #1](https://github.com/m9h/mrs-jax/pull/1) open for review, not merged |
 | **SimNIBS** | External reference for anatomical electrical/field models | Selected reference; no tank/head comparison executed here yet |
 | **sbi4dwi** | Candidate microstructure priors, inference and future scanner/Bloch integration | Audited previously; no modifications in this work package |

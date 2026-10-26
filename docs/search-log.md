@@ -16,6 +16,8 @@ Implementation follow-up on the same date: cloned mrs-jax, followed its feature-
 
 ## Search families
 
+Numerical follow-up, **26 October 2026**: implemented the scalar conductive-tank reference through four [red–green TDD cycles](tdd-conductive-tank.md). Consulted [NIST's finite-volume background](https://pages.nist.gov/fipy/en/master/numerical/discret.html) for the method description; the implementation and analytical checks are local, and no FiPy/SimNIBS comparison is claimed. All 37 workbench tests passed locally with the complete simulation dependencies. The generated tank fixture contains six controls, 4³–32³ convergence, source/file hashes and a visually inspected static figure. No acquired measurements or new literature-evidence claims were added.
+
 - `neuronal current MRI`, `neural current imaging`, `ncMRI`, `NCI`, `magnetic source MRI`, `msMRI`.
 - `Xiong Fox Gao San Antonio`, `Bodurka Bandettini`, `Petridou neuronal electrical activity`.
 - `spin lock neuronal current`, `SIRS`, `REX`, `NEMO`, `ultra low field dcNCI`, with 2024–2026 date terms.

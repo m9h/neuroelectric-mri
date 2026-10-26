@@ -1,6 +1,6 @@
 # A simulation program tied to sbi4dwi and mrs-jax
 
-This research program began with source audits and now includes analytical phase-budget, closed-loop current/timing and [current/MRSI integration benchmarks](../data/synthetic_mrs_current/README.md). The separate **mrs-jax** implementation is linked and pinned in the [implementation roadmap](implementation-roadmap.md), which records delivered work and the next coding ticket. The [original audit](mrs-jax-integration.md) preserves its earlier findings. No acquired MREIT result has been reproduced here.
+This research program began with source audits and now includes analytical phase-budget, closed-loop current/timing, [current/MRSI integration](../data/synthetic_mrs_current/README.md) and [scalar conductive-tank benchmarks](conductive-tank.md). The separate **mrs-jax** implementation is linked and pinned in the [implementation roadmap](implementation-roadmap.md), which records delivered work and the next coding ticket. The [original audit](mrs-jax-integration.md) preserves its earlier findings. No acquired MREIT result has been reproduced here.
 
 ## The historical benchmark is already unusually close
 

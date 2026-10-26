@@ -4,6 +4,8 @@ Scope: a proposed phantom-first release format, drafted 25 October 2026. No acqu
 
 The [current/MRSI fixture](../data/synthetic_mrs_current/README.md) exercises a subset of this contract with raw complex **synthetic** k-space, phase/concentration truth, waveform geometry/timing, source/file hashes and a pinned mrs-jax revision. It is not a completed physical-data release.
 
+The [conductive-tank fixture](../data/synthetic_tank/README.md) adds synthetic SI geometry/conductivity, potential/E/J, conservative face currents, boundary conditions, analytical convergence, source hashes and a conductivity-scaling null. It has no acquired data or complete-circuit B prediction.
+
 ## Release contents
 
 | Asset | Required information |

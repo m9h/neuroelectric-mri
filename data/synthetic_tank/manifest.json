@@ -1,0 +1,461 @@
+{
+  "schema": "neuroelectric-mri.synthetic-tank/0.1",
+  "data_kind": "synthetic_numerical",
+  "scanner_data_available": false,
+  "measured_current_available": false,
+  "complete_circuit_field_available": false,
+  "conductivity_inversion_available": false,
+  "python_version": "3.12.13",
+  "dependencies": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2"
+  },
+  "source_sha256": {
+    "generator": "1fd9348d2400105f56a64f5f7c16663e59a36db9a348be10a3abc37825be5f7d",
+    "solver": "273ee7e25f6898a1e674abc31b006e2b9e930b77fe60c56ab8d9132f8b11b098"
+  },
+  "files_sha256": {
+    "fields.npz": "28befb0e0e290affca16ea2ced2817a0253bd2e6d113fdffcf9a384e3a3c931a",
+    "metrics.csv": "9d0b84125d2fe68f3a49f95caf6aee4089890bc9f8c1987ac4d419ace2e2ac17",
+    "convergence.csv": "b039da0bd2d2d15cf879c2b46fc345a97b96a808e43b68004be0cbc7d060de92",
+    "parameters.json": "fe392fac0e473b1dc5308447e1dd130be0717c904bd8cab03a5e6cd89a5c8260",
+    "summary.png": "fcd04f8e03251913d4779ff402e918bf7914e18894b3295e8333b4c3edc04e87"
+  },
+  "arrays": {
+    "cell_centers_m": {
+      "shape": [
+        8,
+        6,
+        4,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "spacing_m": {
+      "shape": [
+        3
+      ],
+      "dtype": "float64"
+    },
+    "homogeneous_conductivity_s_m": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "homogeneous_potential_v": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "homogeneous_current_density_a_m2": {
+      "shape": [
+        8,
+        6,
+        4,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "homogeneous_electric_field_v_m": {
+      "shape": [
+        8,
+        6,
+        4,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "homogeneous_divergence_a_m3": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "homogeneous_face_current_x_a": {
+      "shape": [
+        9,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "homogeneous_face_current_y_a": {
+      "shape": [
+        8,
+        7,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "homogeneous_face_current_z_a": {
+      "shape": [
+        8,
+        6,
+        5
+      ],
+      "dtype": "float64"
+    },
+    "layered_conductivity_s_m": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "layered_potential_v": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "layered_current_density_a_m2": {
+      "shape": [
+        8,
+        6,
+        4,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "layered_electric_field_v_m": {
+      "shape": [
+        8,
+        6,
+        4,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "layered_divergence_a_m3": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "layered_face_current_x_a": {
+      "shape": [
+        9,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "layered_face_current_y_a": {
+      "shape": [
+        8,
+        7,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "layered_face_current_z_a": {
+      "shape": [
+        8,
+        6,
+        5
+      ],
+      "dtype": "float64"
+    },
+    "inclusion_conductivity_s_m": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "inclusion_potential_v": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "inclusion_current_density_a_m2": {
+      "shape": [
+        8,
+        6,
+        4,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "inclusion_electric_field_v_m": {
+      "shape": [
+        8,
+        6,
+        4,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "inclusion_divergence_a_m3": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "inclusion_face_current_x_a": {
+      "shape": [
+        9,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "inclusion_face_current_y_a": {
+      "shape": [
+        8,
+        7,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "inclusion_face_current_z_a": {
+      "shape": [
+        8,
+        6,
+        5
+      ],
+      "dtype": "float64"
+    },
+    "scaled_inclusion_conductivity_s_m": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "scaled_inclusion_potential_v": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "scaled_inclusion_current_density_a_m2": {
+      "shape": [
+        8,
+        6,
+        4,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "scaled_inclusion_electric_field_v_m": {
+      "shape": [
+        8,
+        6,
+        4,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "scaled_inclusion_divergence_a_m3": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "scaled_inclusion_face_current_x_a": {
+      "shape": [
+        9,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "scaled_inclusion_face_current_y_a": {
+      "shape": [
+        8,
+        7,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "scaled_inclusion_face_current_z_a": {
+      "shape": [
+        8,
+        6,
+        5
+      ],
+      "dtype": "float64"
+    },
+    "reverse_polarity_conductivity_s_m": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "reverse_polarity_potential_v": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "reverse_polarity_current_density_a_m2": {
+      "shape": [
+        8,
+        6,
+        4,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "reverse_polarity_electric_field_v_m": {
+      "shape": [
+        8,
+        6,
+        4,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "reverse_polarity_divergence_a_m3": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "reverse_polarity_face_current_x_a": {
+      "shape": [
+        9,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "reverse_polarity_face_current_y_a": {
+      "shape": [
+        8,
+        7,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "reverse_polarity_face_current_z_a": {
+      "shape": [
+        8,
+        6,
+        5
+      ],
+      "dtype": "float64"
+    },
+    "current_off_conductivity_s_m": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "current_off_potential_v": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "current_off_current_density_a_m2": {
+      "shape": [
+        8,
+        6,
+        4,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "current_off_electric_field_v_m": {
+      "shape": [
+        8,
+        6,
+        4,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "current_off_divergence_a_m3": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "current_off_face_current_x_a": {
+      "shape": [
+        9,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "current_off_face_current_y_a": {
+      "shape": [
+        8,
+        7,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "current_off_face_current_z_a": {
+      "shape": [
+        8,
+        6,
+        5
+      ],
+      "dtype": "float64"
+    },
+    "homogeneous_reference_potential_v": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    },
+    "layered_reference_potential_v": {
+      "shape": [
+        8,
+        6,
+        4
+      ],
+      "dtype": "float64"
+    }
+  },
+  "limitations": [
+    "Scalar conductivity on orthogonal Cartesian cells; no anisotropy",
+    "Ideal full-face electrodes, no contact impedance or lead fields",
+    "Cell J/E are reconstructions; face fluxes define conservation and discrete power",
+    "No independent FEM/SimNIBS comparison or acquired-data validation",
+    "Fixed-current global conductivity scaling is not identifiable from J alone"
+  ]
+}

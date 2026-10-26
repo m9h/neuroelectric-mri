@@ -1,0 +1,131 @@
+{
+  "shape": [
+    8,
+    6,
+    4
+  ],
+  "lengths_m": [
+    0.12,
+    0.08,
+    0.06
+  ],
+  "spacing_m": [
+    0.015,
+    0.013333333333333334,
+    0.015
+  ],
+  "coordinate_frame": "right-handed Cartesian, axes x/y/z",
+  "origin_m": [
+    0,
+    0,
+    0
+  ],
+  "potential_gauge": "x+ electrode at 0 V",
+  "boundary_current_sign": "positive outward",
+  "face_current_sign": "positive toward increasing coordinate on every face",
+  "conductivity_units": "S/m",
+  "current_density_units": "A/m^2",
+  "electric_field_units": "V/m",
+  "cases": {
+    "homogeneous": {
+      "target_current_a": 0.001,
+      "drive_axis": 0,
+      "dirichlet_voltages_v": {
+        "x-": 0.04999999999999992,
+        "x+": 0.0
+      },
+      "insulated_faces": [
+        "y-",
+        "y+",
+        "z-",
+        "z+"
+      ]
+    },
+    "layered": {
+      "target_current_a": 0.001,
+      "drive_axis": 0,
+      "dirichlet_voltages_v": {
+        "x-": 0.07812499999999982,
+        "x+": 0.0
+      },
+      "insulated_faces": [
+        "y-",
+        "y+",
+        "z-",
+        "z+"
+      ]
+    },
+    "inclusion": {
+      "target_current_a": 0.001,
+      "drive_axis": 0,
+      "dirichlet_voltages_v": {
+        "x-": 0.06123480372548273,
+        "x+": 0.0
+      },
+      "insulated_faces": [
+        "y-",
+        "y+",
+        "z-",
+        "z+"
+      ]
+    },
+    "scaled_inclusion": {
+      "target_current_a": 0.001,
+      "drive_axis": 0,
+      "dirichlet_voltages_v": {
+        "x-": 0.020411601241827594,
+        "x+": 0.0
+      },
+      "insulated_faces": [
+        "y-",
+        "y+",
+        "z-",
+        "z+"
+      ]
+    },
+    "reverse_polarity": {
+      "target_current_a": -0.001,
+      "drive_axis": 0,
+      "dirichlet_voltages_v": {
+        "x-": -0.06123480372548273,
+        "x+": 0.0
+      },
+      "insulated_faces": [
+        "y-",
+        "y+",
+        "z-",
+        "z+"
+      ]
+    },
+    "current_off": {
+      "target_current_a": 0.0,
+      "drive_axis": 0,
+      "dirichlet_voltages_v": {
+        "x-": 0.0,
+        "x+": 0.0
+      },
+      "insulated_faces": [
+        "y-",
+        "y+",
+        "z-",
+        "z+"
+      ]
+    }
+  },
+  "convergence_sizes": [
+    4,
+    8,
+    16,
+    32
+  ],
+  "convergence_reference": {
+    "domain_lengths_m": [
+      0.1,
+      0.1,
+      0.1
+    ],
+    "conductivity_s_m": 0.5,
+    "potential": "0.01*(X^4-6*X^2*Y^2+Y^4) V; X=x/0.1, Y=y/0.1",
+    "boundary": "exact potential sampled at all six boundary-face centers"
+  }
+}

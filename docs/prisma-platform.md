@@ -6,7 +6,7 @@ The program's objective is to make current-field and conductivity experiments in
 
 ## What exists and what remains proposed
 
-This repository currently provides a literature atlas, ideal phase examples, an analytical closed-wire-loop/timing benchmark and a [six-control current/MRSI simulation benchmark](../data/synthetic_mrs_current/README.md) using a pinned mrs-jax implementation. It does **not** contain a tissue conductivity solver, scanner sequence, stimulator firmware, validated MR hardware or acquired dataset. The [implementation roadmap](implementation-roadmap.md) records delivered software and the next coding task; the following milestones define physical validation gates.
+This repository provides a literature atlas, analytical closed-loop/timing references, a [current/MRSI benchmark](../data/synthetic_mrs_current/README.md) and a [rectangular scalar-conductivity tank solver](conductive-tank.md). It does **not** contain an anatomical/tensor solver, conductivity inversion, scanner sequence, stimulator firmware, validated MR hardware or acquired dataset. The [implementation roadmap](implementation-roadmap.md) records delivered software and the next coding task; the following milestones define physical validation gates.
 
 ## A common forward model
 
@@ -33,7 +33,7 @@ Use **mrs-jax as the spectroscopy simulation and processing development base**: 
 | Milestone | Deliverable | Exit evidence |
 |---|---|---|
 | **M0: analytical references** | Closed-loop field, polarity and orientation nulls, refocusing-aware waveform integration, timing perturbations | Agreement with independent closed-form limits; regression tests; all examples labeled synthetic. The initial implementation is [current_phantom.py](../examples/current_phantom.py). |
-| **M1: conductivity benchmark** | Homogeneous/inhomogeneous tanks, anisotropic inclusions, contact impedance, full return circuit; reference FEM runs | Mesh-convergence curves, current conservation, boundary-condition checks, comparison of independent solvers, known non-identifiable cases. Withheld geometries and montages for inversion evaluation. |
+| **M1: conductivity benchmark** | Homogeneous/inhomogeneous tanks, anisotropic inclusions, contact impedance, full return circuit; reference FEM runs | Initial scalar tank/analytical convergence, conservation and scaling-null checks are [implemented](conductive-tank.md). Independent FEM, tensor/contact models and complete return circuit remain pending; M1 is not complete. |
 | **M2: bench timing and current platform** | Logged trigger input/output, waveform delivery into characterized loads, independent current/voltage acquisition | Latency/jitter distributions, drift, pulse-area accuracy, compliance/fault logs, missed/extra-trigger tests, reproducible firmware and calibration records. No scanner needed for this gate. |
 | **M3: Prisma wire-loop reference dataset** | Registered loop geometry, current-off and reversed-polarity scans, deliberate timing offsets, repeated positions/orientations | Predicted-versus-measured complex phase, polarity scaling, spatial residual maps and uncertainty budget; measured timing and current traces for every run. Configuration-specific MR engineering clearance precedes scanning. |
 | **M4: conductive-phantom dataset** | Independently characterized conductivity contrasts, multiple current patterns, repeat sessions | Conductivity/J/E recovery on held-out current patterns; distinguish parameter uncertainty from model mismatch. Release failed/null runs as well as successful runs. |
