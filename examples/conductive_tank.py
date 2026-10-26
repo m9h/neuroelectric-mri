@@ -209,3 +209,53 @@ def solve_tank(
     if not np.all(np.isfinite(potential)):
         raise RuntimeError("Tank solve produced nonfinite potentials")
     return _recover(potential, sigma, spacing, boundaries, conductances)
+
+
+def solve_plate_current(
+    conductivity_s_m: np.ndarray,
+    spacing_m: tuple[float, float, float],
+    current_a: float,
+    *,
+    axis: int = 0,
+) -> TankSolution:
+    """Drive a specified total current between opposite equipotential faces.
+
+    Parameters
+    ----------
+    conductivity_s_m : array, shape (nx, ny, nz)
+        Positive scalar conductivity in S/m, as in solve_tank.
+    spacing_m : sequence of three floats
+        Cell sizes in metres.
+    current_a : float
+        Total current in amperes. Positive flows from the minus-axis face to
+        the plus-axis face; negative reverses it. Zero is an exact null.
+    axis : {0, 1, 2}
+        Plate-normal direction. The plus-axis plate is the 0 V reference;
+        other faces are insulated. Finite-sized/contact electrodes and lead
+        fields are not modeled.
+
+    Returns
+    -------
+    TankSolution
+        A unit-voltage solve rescaled linearly to the specified total current.
+        The required voltage is in boundary_potential_v. With ideal contacts,
+        globally scaling sigma changes voltage/E but not fixed-current J;
+        this is a deliberate non-identifiability case for current imaging.
+    """
+    current = _real_array(current_a, "current_a")
+    if current.shape != ():
+        raise ValueError("current_a must be a scalar")
+    if not isinstance(axis, (int, np.integer)) or axis not in (0, 1, 2):
+        raise ValueError("axis must be 0, 1 or 2")
+    name = "xyz"[axis]
+    unit = solve_tank(conductivity_s_m, spacing_m, {name + "-": 1., name + "+": 0.})
+    reference_current = unit.boundary_current_a[name + "+"]
+    if not np.isfinite(reference_current) or reference_current <= 0:
+        raise RuntimeError("Unit-voltage solve did not produce a positive finite conductance")
+    scale = float(current) / reference_current
+    potential = unit.potential_v * scale
+    boundaries = {key: value * scale for key, value in unit.boundary_potential_v.items()}
+    if not np.all(np.isfinite(potential)) or not all(np.all(np.isfinite(v)) for v in boundaries.values()):
+        raise ValueError("Current drive overflows the voltage representation")
+    return _recover(potential, unit.conductivity_s_m, unit.spacing_m, boundaries,
+                    _conductances(unit.conductivity_s_m, unit.spacing_m))
