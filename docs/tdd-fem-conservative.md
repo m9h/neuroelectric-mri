@@ -15,3 +15,7 @@ Second, DOLFINx's refinement parent array uses pre-reordering child indices. Exp
 The first exporter also used an outdated permutation call. Tests exposed the pinned API's distinction between entity quadrature permutations and cell element-DOF permutations; the exporter now records `create_cell_permutations()` / `get_cell_permutation_info()` data. No numerical tolerances were relaxed.
 
 The resulting finite-patch refinement reduces η²/P from 2.7893% to 0.8165%, meets the 1% target, and retains exact-slab and explicitly unmet-target cases. Conservation and energy diagnostics are tested by integrating the returned functions independently, not merely checking their reported metadata.
+
+## Linux runner transport failure
+
+The numerical implementation passed all 25 FEM tests in [run 40418053364](https://github.com/m9h/neuroelectric-mri/actions/runs/40418053364). A later documentation/data commit failed before testing in [run 40418383226](https://github.com/m9h/neuroelectric-mri/actions/runs/40418383226): MPICH/UCX attempted to initialize an unsupported `mana_0` RDMA device exposed by that hosted runner. The serial FEM job now sets `UCX_TLS=self,sm,tcp`, following the [official UCX transport-selection mechanism](https://openucx.readthedocs.io/en/master/faq.html). This changes the CI transport configuration, not the numerical tests or tolerances. It makes no multi-node performance claim.

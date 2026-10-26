@@ -20,6 +20,10 @@ jobs:
       - run: python examples/tank_benchmark.py --output /tmp/synthetic-tank --plot
   fem-benchmarks:
     runs-on: ubuntu-24.04
+    env:
+      # The reference is serial. Hosted runners may expose an unusable RDMA
+      # device; avoid UCX probing verbs/mana during MPI initialization.
+      UCX_TLS: self,sm,tcp
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
