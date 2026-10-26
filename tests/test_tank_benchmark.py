@@ -6,16 +6,32 @@ import importlib.util
 import json
 from pathlib import Path
 import tempfile
+from types import SimpleNamespace
 import unittest
 
 AVAILABLE = all(importlib.util.find_spec(n) is not None for n in ("numpy", "scipy"))
 if AVAILABLE:
     import numpy as np
-    from examples.tank_benchmark import write_benchmark
+    from examples.tank_benchmark import write_benchmark, _diagnostics
 
 
 @unittest.skipUnless(AVAILABLE, "Install requirements-tank.txt")
 class TankBenchmarkTests(unittest.TestCase):
+    def test_local_inflow_and_outflow_do_not_cancel_in_imbalance_denominator(self):
+        # Fault-injection ledger: one face both sources and sinks current.
+        # Local inflow=1 A, local outflow=1.1 A; normalization must not use
+        # only face net totals, which would report a misleading 200% error.
+        x = np.zeros((2, 2, 2))
+        x[0, 0, :] = [-1., 1.]
+        x[1, 0, 0] = .1
+        result = SimpleNamespace(
+            face_current_a=(x, np.zeros((1, 3, 2)), np.zeros((1, 2, 3))),
+            boundary_current_a={"x-": 0., "x+": .1, "y-": 0., "y+": 0., "z-": 0., "z+": 0.},
+            boundary_power_w=1., dissipated_power_w=1.,
+        )
+        metrics = _diagnostics(result)
+        self.assertAlmostEqual(metrics["boundary_relative_imbalance"], .1 / 1.05)
+
     def test_release_has_si_fields_conservation_and_provenance(self):
         with tempfile.TemporaryDirectory() as folder:
             output = Path(folder)
