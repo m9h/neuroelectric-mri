@@ -12,11 +12,11 @@ The benchmark combines this repository's closed-loop field model with mrs-jax. I
 
 ## Stage 2 — Conductivity and complete-circuit field benchmarks
 
-**First tank milestone delivered:** a [3D conservative scalar-conductivity solver](conductive-tank.md), homogeneous/layered/inclusion controls, fixed-current plates, E/J and face-current export, power balance, and nonlinear analytical convergence. Its [red–green TDD record](tdd-conductive-tank.md) retains the failing and passing commits. The complete workbench now passes 37 tests with all dependencies present. Finite electrodes, contact impedance, anisotropy and complete-circuit magnetic fields remain open. Use SimNIBS as an anatomical reference and retain independent analytical checks for small geometries.
+**Two tank milestones delivered:** the [3D conservative scalar FV reference](conductive-tank.md) and an independent [DOLFINx/Gmsh complete-electrode FEM implementation](fem-complete-electrode.md). The FEM model adds finite electrode patches, Ω·m² contact impedance, piecewise scalar/SPD tensor conductivity, CG1/CG2 and edge-refined CAD meshes. Analytical homogeneous/layered checks, a layered FV/FEM comparison, tensor rotation, reciprocity and energy/current checks pass. There are 48 distinct tests across the two environments. Red–green histories are retained for [FV](tdd-conductive-tank.md) and [FEM](tdd-fem.md). Complete-circuit magnetics and anatomical validation remain open.
 
 Deliver versioned geometry, conductivity, electrodes, mesh, E/J/B fields and convergence reports. Require charge conservation, mesh convergence, polarity/orientation checks and agreement with independent solutions. Only then add conductivity inference; hold out geometries and injection patterns, and show cases where B-parallel data cannot identify the requested parameters. sbi4dwi supplies candidate microstructure priors and inference components after these forward checks.
 
-The **next coding ticket** is finite electrode patches/contact impedance with independent FEM comparison. Then specify outgoing and return leads and compare the complete magnetic field with analytical limits before connecting tank J to MR encoding. The current scalar tank deliberately exports no B field. Its fixed-current conductivity-scaling null is retained as an identifiability check for later inversion.
+The **next coding ticket** is conservative FEM current reconstruction with cell/interface charge checks and error estimates. Then compare the same CEM problem independently in GetDP, specify outgoing/return leads, and validate complete-circuit magnetic fields before connecting tank J to MR encoding. The [PDE/FEM roadmap](fem-roadmap.md) defines PETSc/MPI scaling, MFEM evaluation and derivative gates. Neither tank exports B yet. The FV fixed-current conductivity-scaling null remains an identifiability check for later inversion.
 
 ## Stage 3 — Measured timing and current, before the scanner
 
@@ -40,7 +40,7 @@ Freeze the analysis and test a new session and independent site/configuration. E
 
 | Repository/component | Responsibility | Present status |
 |---|---|---|
-| **neuroelectric-mri** | Literature, conventions, physical references, integration benchmarks, data contracts and scanner requirements | Analytical references, synthetic MRSI benchmark and scalar tank solver with convergence/null controls implemented |
+| **neuroelectric-mri** | Literature, conventions, physical references, integration benchmarks, data contracts and scanner requirements | Analytical/MRSI references, conservative scalar FV and DOLFINx tensor-CEM tanks with synthetic releases and red–green tests |
 | **mrs-jax** | Spectroscopy phantoms, forward models, processing and phase/timing support | Implementation on `feature/current-encoding`; [PR #1](https://github.com/m9h/mrs-jax/pull/1) open for review, not merged |
 | **SimNIBS** | External reference for anatomical electrical/field models | Selected reference; no tank/head comparison executed here yet |
 | **sbi4dwi** | Candidate microstructure priors, inference and future scanner/Bloch integration | Audited previously; no modifications in this work package |

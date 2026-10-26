@@ -46,7 +46,11 @@ Our proposed experimental starting point is a **Siemens Prisma 3 T**, connecting
 | [Active groups and software audit](docs/mreit-ecosystem.md) | [Prisma program and Siemens technical brief](docs/prisma-platform.md) | [Open-data contract](docs/open-data.md) |
 | SimNIBS, MRCI, CoReHA, CTI and MRSI | Scanner triggers, external gating, current monitoring and verification | Geometry, raw complex data, waveforms, clocks, provenance and null controls |
 
-**Implemented:** analytical closed-loop fields, refocusing-aware timing, a [six-control current/MRSI benchmark](data/synthetic_mrs_current/README.md), and a [3D conductive-tank reference](data/synthetic_tank/README.md) with conservation, power and mesh-convergence checks. The complete workbench has 37 tests. The tank was developed through [recorded red–green TDD cycles](docs/tdd-conductive-tank.md). **Next:** finite electrodes/contact impedance, independent FEM comparison and complete-circuit magnetic fields, alongside realistic spectroscopy validation. See the [implementation roadmap](docs/implementation-roadmap.md). All checked-in datasets are synthetic.
+**Implemented:** analytical closed-loop fields, refocusing-aware timing, a [six-control current/MRSI benchmark](data/synthetic_mrs_current/README.md), a [conservative finite-volume tank](data/synthetic_tank/README.md), and a [DOLFINx/Gmsh complete-electrode FEM model](data/synthetic_fem/README.md) with tensor conductivity, contact impedance, CG1/CG2 and electrode-edge refinement. **48 distinct tests** span the spectroscopy/FV and FEM environments. Development follows recorded red–green TDD: [FV](docs/tdd-conductive-tank.md) · [FEM](docs/tdd-fem.md). All checked-in datasets are synthetic.
+
+**Next:** conservative FEM current reconstruction and error estimates, an independent GetDP CEM comparison, complete-circuit magnetic fields, then scalable PETSc solves and verified derivatives. The [PDE/FEM roadmap](docs/fem-roadmap.md) explains the roles of DOLFINx, Gmsh/OpenCASCADE, GetDP and MFEM. The [implementation roadmap](docs/implementation-roadmap.md) connects these gates to spectroscopy and Prisma measurements.
+
+![Complete-electrode FEM fields and h/p refinement](data/synthetic_fem/summary.png)
 
 ![Synthetic tank potential, current density and convergence](data/synthetic_tank/summary.png)
 
@@ -78,6 +82,9 @@ The history connects this work to **Bodurka, Petridou and Bandettini**, biologic
 | [Current/MRSI benchmark](data/synthetic_mrs_current/README.md) | Six controls separating injected phase and concentration; raw complex synthetic data |
 | [Conductive-tank reference](docs/conductive-tank.md) | Scalar finite-volume solver, fixed-current plates, field/flux conventions and analytical checks |
 | [Tank TDD record](docs/tdd-conductive-tank.md) | Failing-test and passing-implementation commits, including a diagnostic regression |
+| [Complete-electrode FEM](docs/fem-complete-electrode.md) | DOLFINx/UFL tensor model, finite electrodes, contact impedance and analytical checks |
+| [PDE/FEM roadmap](docs/fem-roadmap.md) | Error control, conservative currents, GetDP comparisons, PETSc/MPI, MFEM and adjoints |
+| [FEM TDD record](docs/tdd-fem.md) | Recorded failing/passing cycles, convergence-driven refinement and CAD-tag regression |
 
 ## 🏷️ Why this name?
 
@@ -95,7 +102,7 @@ python3 -m unittest discover -s tests -v
 python3 scripts/build_references.py --check
 ```
 
-The standard-library examples compute ideal phase budgets, closed-wire-loop fields, cancellation cases and timing-dependent phase errors. Spectroscopy tests skip if mrs-jax is unavailable; tank tests skip if NumPy/SciPy are unavailable. To run the complete workbench and regenerate its numerical fixtures:
+The standard-library examples compute ideal phase budgets, closed-wire-loop fields, cancellation cases and timing-dependent phase errors. Spectroscopy tests skip if mrs-jax is unavailable; tank tests skip if NumPy/SciPy are unavailable. FEM tests require a separate DOLFINx environment. To run the spectroscopy/FV workbench and regenerate its numerical fixtures:
 
 ```sh
 python -m pip install -r requirements-simulation.txt
@@ -104,6 +111,6 @@ python examples/tank_benchmark.py --output /tmp/synthetic-tank --plot
 python -m unittest discover -s tests -v
 ```
 
-For just the tank solver, install `requirements-tank.txt`; matplotlib is optional for its figure. The workbench does not perform conductivity inversion or reproduce an acquired experiment. No changes to sbi4dwi are required.
+For just the FV tank, install `requirements-tank.txt`; matplotlib is optional for its figure. For the FEM suite, install `requirements-fem.txt` in a separate environment and follow the [FEM reproduction instructions](docs/fem-complete-electrode.md#reproduce). The workbench does not perform conductivity inversion or reproduce an acquired experiment. No changes to sbi4dwi are required.
 
 For a research program, start with calibrated current phantoms and artifact controls; then test whether plausible neural sources remain identifiable after voxel averaging, acquisition, and nuisance variability. Simulation-based inference becomes useful once this forward problem and its null cases are credible.

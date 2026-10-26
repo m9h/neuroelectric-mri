@@ -38,6 +38,12 @@ Primary papers, publisher records, PubMed/PMC, authors' institutional repositori
 - Publication dates were separated from crawl, repository deposit and PDF download dates.
 - The local sbi4dwi code audit was read-only and revision-pinned. No claim is made that all its existing tests pass or that the library already supports the proposed neural simulation.
 
+## PDE/FEM implementation audit — 26 October 2026
+
+Read official DOLFINx installation, SciPy assembly and Gmsh-import documentation; Gmsh/OpenCASCADE documentation; GetDP's project/release/formulation page; MFEM feature/GPU documentation; and the original CEM publication metadata (Somersalo, Cheney & Isaacson, DOI 10.1137/0152060). Source links and the resulting architecture decision are in the [FEM roadmap](fem-roadmap.md).
+
+Inspected local `ti-sim` mesh generation and replication notes. The referenced neurofedora sphere source was not present in the local checkout, so its results were not rerun. Implemented and tested DOLFINx CEM directly using the pinned official beta wheel and Gmsh 4.15.2; no GetDP/MFEM execution or PETSc/MPI scaling is claimed. The [TDD record](tdd-fem.md) includes the failed refinement test and a separate CAD-tagging regression. All new datasets are synthetic.
+
 ## Resources to revisit
 
 | Resource | Access verified here | Use |

@@ -58,4 +58,4 @@ print(result.boundary_current_a)  # A, outward sign
 print(result.boundary_potential_v["x-"].mean())  # 0.05 V
 ```
 
-These values define a synthetic example, not equipment settings. The next model gates are finite electrodes/contact impedance, an independent FEM comparison, and a specified lead/electrode/return geometry for the complete magnetic field. This solver intentionally exports **no B field**: an open tank current distribution alone does not specify the magnetic field of the complete experimental circuit. Scanner encoding, inversion, anisotropy and acquired-data validation remain later work.
+These values define a synthetic example, not equipment settings. A separate [DOLFINx FEM model](fem-complete-electrode.md) now adds finite electrodes, contact impedance and tensor conductivity, including an independent layered-slab comparison with this FV solver. Neither tank exports **B**: an open tank current distribution alone does not specify the complete experimental circuit. Conservative FEM currents, full lead/return geometry, scanner encoding, inversion and acquired-data validation remain later work; see the [FEM roadmap](fem-roadmap.md).

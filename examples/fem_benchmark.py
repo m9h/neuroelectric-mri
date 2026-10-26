@@ -48,6 +48,7 @@ def _plot(output, fields, rows):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
+    from matplotlib.ticker import NullFormatter
 
     x, z = fields["slice_x_m"] * 1e3, fields["slice_z_m"] * 1e3
     fig, axes = plt.subplots(1, 3, figsize=(13, 3.8), layout="constrained")
@@ -65,6 +66,8 @@ def _plot(output, fields, rows):
                      "o-", color=color, label=f"CG{degree}")
     axes[2].set(xlabel="Potential degrees of freedom", ylabel="Electrode voltage (mV)",
                 xscale="log", title="h / p refinement · 1 mA")
+    axes[2].set_xticks([400, 1000, 3000, 8000], ["400", "1,000", "3,000", "8,000"])
+    axes[2].xaxis.set_minor_formatter(NullFormatter())
     axes[2].grid(alpha=.2)
     axes[2].legend()
     fig.savefig(output / "summary.png", dpi=160)

@@ -1,0 +1,40 @@
+{
+  "lengths_m": [
+    0.12,
+    0.08,
+    0.06
+  ],
+  "mesh_sizes_m": [
+    0.03,
+    0.02,
+    0.012
+  ],
+  "patch_fraction": 0.5,
+  "electrode_edge_mesh_size_factor": 0.125,
+  "electrode_edge_grading_distance": "mesh_size_m",
+  "electrode_currents_a": {
+    "101": 0.001,
+    "102": -0.001
+  },
+  "contact_impedance_ohm_m2": {
+    "101": 0.002,
+    "102": 0.005
+  },
+  "reference_electrode": 102,
+  "conductivity_s_m": {
+    "homogeneous": 0.5,
+    "layered": {
+      "1": 0.2,
+      "2": 0.8
+    },
+    "finite_patch": 0.5
+  },
+  "archived_field_mesh": "finite_patch_2.msh",
+  "archived_field_degree": 2,
+  "archived_cell_order": "DOLFINx; use archived dof maps, not Gmsh element ordering",
+  "current_sign": "positive into tank",
+  "contact_units": "ohm m^2",
+  "slice_y_m": 0.04,
+  "current_field": "DG1 gradient reconstruction; not H(div) equilibrated",
+  "convergence_reference": "No exact finite-patch solution; report successive h/p voltage changes"
+}

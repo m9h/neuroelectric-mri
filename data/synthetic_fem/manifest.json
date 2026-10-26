@@ -1,0 +1,32 @@
+{
+  "synthetic": true,
+  "solver": "DOLFINx CEM / SciPy serial",
+  "schema_version": 1,
+  "python": "3.12.13",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "versions": {
+    "fenics-dolfinx": "0.12.0.dev202610191637",
+    "fenics-basix": "0.12.0.dev202610191637",
+    "fenics-ffcx": "0.12.0.dev202610191637",
+    "fenics-ufl": "2026.3.0.dev202610191637",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "gmsh": "4.15.2",
+    "mpi4py": "4.1.2"
+  },
+  "source_sha256": {
+    "examples/fem_tank.py": "a56cb2e89cc816daad1ef3d6879bde3caa1daea291717bd7ad35f3f56ef1648c",
+    "examples/fem_benchmark.py": "4e5c5918dc7b2069b669afee1706c1fe5c2cecd098c00b42bcd1ad904a381e12"
+  },
+  "files_sha256": {
+    "homogeneous.msh": "4d47e08ce6e723cc556048be0dd21eb190af6af00bf68df9412ea6f78fa70753",
+    "layered.msh": "259851181df6fd58c5e88bbbb91520d1fc32b1e512c18a181b95cef5ef52d237",
+    "finite_patch_0.msh": "8aeebc4b7a6590f86ec1b4d4ccc7175c340e8038e064b1cca9881d9e43f9c061",
+    "finite_patch_1.msh": "4fb2dd831024ed7d2043bbc7adc9ef7936e1c4efb88aca31aa00b3d1e2940d1b",
+    "finite_patch_2.msh": "233d94f22a0c3caa414bffc7b9ee06b2c1c6a80157a80a236a13bafefb145ce6",
+    "fields.npz": "2844cb8856d1677a8a7ac21a13651116a324249a3ec2f8c183afba2e0a10b07c",
+    "metrics.csv": "29f6f2f3670f578a8502a11f8d09ef7276941ca3dffc85ef43f9ad11ce659c67",
+    "parameters.json": "1be8f83bac2d491d478905bd3bfbc263c2dff3bbbdd480d65e5d0e962c6302ad",
+    "summary.png": "c273ad0fd044e5f49bcba2a26a61732161ff8df7a48344509f82c9cef2e53770"
+  }
+}
