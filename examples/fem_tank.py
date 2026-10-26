@@ -77,9 +77,14 @@ def build_tank_mesh(lengths_m=(.12, .08, .06), mesh_size_m=.02,
                           ((y0, z0), (y1, z0), (y1, z1), (y0, z1))]
                 lines = [occ.addLine(points[i], points[(i + 1) % 4]) for i in range(4)]
                 patches.append((2, occ.addPlaneSurface([occ.addCurveLoop(lines)])))
+        patch_entities = {}
         if len(volumes) > 1 or patches:
             # Boolean fragments imprint electrode edges and material interfaces.
-            occ.fragment(volumes[:1], volumes[1:] + patches)
+            _, fragment_map = occ.fragment(volumes[:1], volumes[1:] + patches)
+            # Preserve CAD ancestry: a patch and its surrounding face can
+            # have identical centroids and even identical areas.
+            for i in range(len(patches)):
+                patch_entities[101 + i] = {t for d, t in fragment_map[len(volumes) + i] if d == 2}
         occ.synchronize()
         materials = {1: [], 2: []}
         for _, tag in gmsh.model.getEntities(3):
@@ -96,7 +101,10 @@ def build_tank_mesh(lengths_m=(.12, .08, .06), mesh_size_m=.02,
             area = occ.getMass(dim, tag)
             electrode = None
             for x, label in ((0., 101), (lx, 102)):
-                if (np.allclose(center, [x, ly / 2, lz / 2], rtol=0, atol=1e-10)
+                if fraction < 1:
+                    if tag in patch_entities[label]:
+                        electrode = label
+                elif (np.allclose(center, [x, ly / 2, lz / 2], rtol=0, atol=1e-10)
                         and np.isclose(area, expected_area, rtol=1e-8, atol=0)):
                     electrode = label
             groups[199 if electrode is None else electrode].append(tag)
