@@ -57,6 +57,15 @@ class CompleteElectrodeTests(unittest.TestCase):
                 self.assertAlmostEqual(out.contact_power_w, .001**2 * (.002 + .005) / self.area, places=13)
                 self.check_balance(out)
 
+    def test_half_area_patch_does_not_absorb_the_insulating_remainder(self):
+        # At this size the central patch and its surrounding face have the
+        # SAME centroid and area: geometry heuristics alone cannot label them.
+        data = build_tank_mesh(patch_fraction=np.sqrt(.5))
+        ds = ufl.Measure("ds", domain=data.mesh, subdomain_data=data.facet_tags)
+        for tag in (101, 102):
+            area = fem.assemble_scalar(fem.form(1 * ds(tag)))
+            self.assertAlmostEqual(area, self.area / 2, places=13)
+
     def test_layered_slab_matches_series_resistance_and_fv(self):
         from examples.conductive_tank import solve_plate_current
         data = build_tank_mesh(layered=True)
