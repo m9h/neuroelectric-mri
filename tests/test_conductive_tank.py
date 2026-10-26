@@ -139,6 +139,39 @@ class ConductiveTankTests(unittest.TestCase):
             with self.subTest(args=str(args)[:80]), self.assertRaises(ValueError):
                 tank.solve_tank(*args)
 
+    def test_current_drive_matches_total_current_and_analytic_voltage(self):
+        sigma = np.full((6, 4, 3), .5)
+        spacing = np.array([.02, .015, .01])
+        lengths = np.array(sigma.shape) * spacing
+        for axis, name in enumerate("xyz"):
+            area = np.prod(np.delete(lengths, axis))
+            resistance = lengths[axis] / (.5 * area)
+            for current in (.0007, -.0007, 0.):
+                with self.subTest(axis=name, current=current):
+                    result = tank.solve_plate_current(sigma, spacing, current, axis=axis)
+                    self.assertAlmostEqual(result.boundary_current_a[name + "+"], current, places=13)
+                    self.assertAlmostEqual(result.boundary_current_a[name + "-"], -current, places=13)
+                    np.testing.assert_allclose(result.boundary_potential_v[name + "-"],
+                                                current * resistance, atol=1e-13)
+                    np.testing.assert_allclose(result.current_density_a_m2[..., axis], current / area,
+                                                atol=1e-12)
+                    self.assertAlmostEqual(result.dissipated_power_w, current**2 * resistance, places=13)
+
+    def test_fixed_current_cannot_identify_global_conductivity_scale(self):
+        sigma = np.full((6, 4, 3), .4)
+        sigma[2:4, 1:3, 1:2] = .1
+        base = tank.solve_plate_current(sigma, (.01,) * 3, .001)
+        scaled = tank.solve_plate_current(3 * sigma, (.01,) * 3, .001)
+        np.testing.assert_allclose(scaled.potential_v, base.potential_v / 3, atol=1e-13)
+        np.testing.assert_allclose(scaled.current_density_a_m2, base.current_density_a_m2, atol=1e-11)
+        np.testing.assert_allclose(scaled.electric_field_v_m, base.electric_field_v_m / 3, atol=1e-11)
+        self.assertAlmostEqual(scaled.dissipated_power_w, base.dissipated_power_w / 3, places=13)
+
+    def test_invalid_current_drive_is_rejected(self):
+        for current, axis in ((np.nan, 0), (1j, 0), (.001, 3), (.001, "x"), ([.001], 0)):
+            with self.subTest(current=current, axis=axis), self.assertRaises(ValueError):
+                tank.solve_plate_current(np.ones((3, 3, 3)), (.01,) * 3, current, axis=axis)
+
 
 if __name__ == "__main__":
     unittest.main()
