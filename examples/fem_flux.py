@@ -89,7 +89,7 @@ def reconstruct_current(mesh_data, solution, *, degree=1):
         raise ValueError("Only affine tetrahedra are supported")
     if isinstance(degree, (bool, np.bool_)) or not isinstance(degree, (int, np.integer)) or degree not in (1, 2):
         raise ValueError("RT degree must be integer 1 or 2")
-    if solution.relative_residual > 1e-8:
+    if not np.isfinite(solution.relative_residual) or solution.relative_residual > 1e-8:
         raise ValueError("The input CEM solution is not sufficiently converged")
     contacts = solution.contact_impedance_ohm_m2
     tags = sorted(solution.applied_current_a)
@@ -105,6 +105,17 @@ def reconstruct_current(mesh_data, solution, *, degree=1):
     insulated = ufl.Measure("ds", domain=domain, subdomain_data=insulation_tags)(0)
     n = ufl.FacetNormal(domain)
     potential, sigma = solution.potential_v, solution.conductivity_s_m
+    current_scale = .5 * sum(abs(i) for i in solution.applied_current_a.values())
+    for t in tags:
+        target = _integral((solution.electrode_potential_v[t] - potential) / contacts[t] * ds(t))
+        if abs(target - solution.applied_current_a[t]) > 1e-8 * (current_scale or 1.):
+            raise ValueError("Contact trace does not carry the prescribed electrode current")
+    primal_energy = _integral(ufl.inner(ufl.dot(sigma, ufl.grad(potential)), ufl.grad(potential)) * dx)
+    primal_energy += sum(_integral((potential - solution.electrode_potential_v[t])**2 / contacts[t] * ds(t))
+                         for t in tags)
+    supplied = sum(solution.electrode_potential_v[t] * solution.applied_current_a[t] for t in tags)
+    if abs(primal_energy - supplied) > 1e-8 * max(abs(supplied), 1e-30):
+        raise ValueError("Input CEM field fails its physical power identity")
     inverse_sigma = ufl.inv(sigma)
     flux_space = fem.functionspace(domain, ("RT", degree))
     multiplier_space = fem.functionspace(domain, ("DG", degree - 1))
@@ -139,7 +150,6 @@ def reconstruct_current(mesh_data, solution, *, degree=1):
     if not np.all(np.isfinite(result)) or not np.all(np.isfinite(coefficients)):
         raise RuntimeError("Conservative reconstruction produced nonfinite values")
     coefficients[free] = result[:len(free)]
-    current_scale = .5 * sum(abs(i) for i in solution.applied_current_a.values())
     constraint_residual = float(np.linalg.norm(divergence @ coefficients) / (current_scale or 1.))
     stationarity_residual = float(np.linalg.norm(matrix @ result - constrained_rhs)
                                   / (np.linalg.norm(constrained_rhs) or 1.))
@@ -162,6 +172,10 @@ def reconstruct_current(mesh_data, solution, *, degree=1):
                                 + sum(contact_density[t] * q * ds(t) for t in tags))
     cell_balance = _cell_integrals(domain, lambda q: ufl.div(current) * q * dx)
     electrode_current = {t: -_integral(normal * ds(t)) for t in tags}
+    if any(abs(electrode_current[t] - solution.applied_current_a[t]) > 1e-8 * (current_scale or 1.) for t in tags):
+        raise RuntimeError("Reconstructed trace failed the prescribed-current check")
+    if abs(dual_power - supplied - bulk_error - contact_error) > 1e-8 * max(abs(supplied), abs(dual_power), 1e-30):
+        raise RuntimeError("Primal/complementary energy identity failed")
     return ConservativeCurrent(
         current, degree, cell_balance, indicator, electrode_current,
         np.sqrt(max(0., _integral(ufl.div(current)**2 * dx))),
