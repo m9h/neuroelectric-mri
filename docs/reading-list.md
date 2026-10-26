@@ -4,6 +4,16 @@ Generated from [sources.json](../references/sources.json); checked 2026-10-25.
 
 Evidence descriptions characterize individual studies, not field-wide validation.
 
+## somersalo1992 — 1992 — CEM/FEM
+
+**[Existence and Uniqueness for Electrode Models for Electric Current Computed Tomography](https://doi.org/10.1137/0152060)**. Somersalo, Erkki and Cheney, Margaret and Isaacson, David. *SIAM Journal on Applied Mathematics*.
+
+Status: **published** · Evidence: mathematical electrode model.
+
+Classical complete electrode model and its existence/uniqueness foundation for current-driven conductivity problems. **Limit:** Mathematical foundation, not MRI acquisition or validation of this repository's discretization.
+
+Verification: SIAM publisher metadata/abstract inspected 26 October 2026; full proof not independently reproduced.
+
 ## kamei1999 — 1999 — ncMRI
 
 **[Neuronal current distribution imaging using magnetic resonance](https://doi.org/10.1109/20.800771)**. Kamei, H. and Iramina, K. and Yoshikawa, K. and Ueno, S.. *IEEE Transactions on Magnetics*.
@@ -313,6 +323,16 @@ Status: **retracted** · Evidence: retracted mouse claim.
 Historically influential DIANA report. **Limit:** RETRACTED 2025-09-25; see 10.1126/science.aec1773. Do not use as validated positive evidence.
 
 Verification: PubMed retracted-publication record and linked retraction notice.
+
+## diazavalos2023 — 2023 — CEM/FEM
+
+**[Applications of the duality theory of convex analysis to the complete electrode model of electrical impedance tomography](https://doi.org/10.17268/sel.mat.2023.01.09)**. Díaz-Avalos, Josué D.. *Selecciones Matemáticas*.
+
+Status: **published** · Evidence: duality and a posteriori numerical analysis.
+
+Develops a current-field dual formulation and CEM error estimates, with finite-element numerical examples. **Limit:** No MRI validation. The tensor reconstruction and numerical energy bracket here are separately implemented and tested, not a reproduction of this paper's experiments.
+
+Verification: Publisher abstract and metadata inspected 26 October 2026; full numerical implementation not reproduced.
 
 ## goksu2023 — 2023 — MRCDI
 

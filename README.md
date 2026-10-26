@@ -5,7 +5,7 @@
 # 🧠 Neuroelectric MRI
 
 <p>
-  <a href="docs/reading-list.md"><img src="https://img.shields.io/badge/annotated_sources-52-16a6a0?style=flat-square" alt="52 annotated sources"></a>
+  <a href="docs/reading-list.md"><img src="https://img.shields.io/badge/annotated_sources-54-16a6a0?style=flat-square" alt="54 annotated sources"></a>
   <a href="docs/methods.md"><img src="https://img.shields.io/badge/literature-October_2026-8b75e8?style=flat-square" alt="Literature through October 2026"></a>
   <a href="docs/simulation-roadmap.md"><img src="https://img.shields.io/badge/simulation-POSSUM_%E2%86%92_SBI-e6a24b?style=flat-square" alt="Simulation: POSSUM to SBI"></a>
   <a href="examples/phase_budget.py"><img src="https://img.shields.io/badge/Python-3.10%2B-4285c5?style=flat-square" alt="Python 3.10 or newer"></a>
@@ -46,11 +46,13 @@ Our proposed experimental starting point is a **Siemens Prisma 3 T**, connecting
 | [Active groups and software audit](docs/mreit-ecosystem.md) | [Prisma program and Siemens technical brief](docs/prisma-platform.md) | [Open-data contract](docs/open-data.md) |
 | SimNIBS, MRCI, CoReHA, CTI and MRSI | Scanner triggers, external gating, current monitoring and verification | Geometry, raw complex data, waveforms, clocks, provenance and null controls |
 
-**Implemented:** analytical closed-loop fields, refocusing-aware timing, a [six-control current/MRSI benchmark](data/synthetic_mrs_current/README.md), a [conservative finite-volume tank](data/synthetic_tank/README.md), and a [DOLFINx/Gmsh complete-electrode FEM model](data/synthetic_fem/README.md) with tensor conductivity, contact impedance, CG1/CG2 and electrode-edge refinement. **48 distinct tests** span the spectroscopy/FV and FEM environments. Development follows recorded red–green TDD: [FV](docs/tdd-conductive-tank.md) · [FEM](docs/tdd-fem.md). All checked-in datasets are synthetic.
+**Implemented:** analytical closed-loop fields, refocusing-aware timing, a [six-control current/MRSI benchmark](data/synthetic_mrs_current/README.md), a [conservative finite-volume tank](data/synthetic_tank/README.md), and a [DOLFINx/Gmsh complete-electrode FEM model](data/synthetic_fem/README.md) with tensor conductivity and contact impedance. The new [adaptive conservative-current release](data/synthetic_fem_adaptive/README.md) adds Raviart–Thomas currents, contact-inclusive energy error indicators and tagged local mesh refinement. **62 distinct tests** span the spectroscopy/FV and FEM environments. Red–green TDD records: [FV](docs/tdd-conductive-tank.md) · [CEM](docs/tdd-fem.md) · [conservation/adaptivity](docs/tdd-fem-conservative.md). All checked-in datasets are synthetic.
 
-**Next:** conservative FEM current reconstruction and error estimates, an independent GetDP CEM comparison, complete-circuit magnetic fields, then scalable PETSc solves and verified derivatives. The [PDE/FEM roadmap](docs/fem-roadmap.md) explains the roles of DOLFINx, Gmsh/OpenCASCADE, GetDP and MFEM. The [implementation roadmap](docs/implementation-roadmap.md) connects these gates to spectroscopy and Prisma measurements.
+**Latest numerical result:** one adaptive refinement reduces the relative CEM energy gap from **2.79% to 0.817%**, giving a numerical resistance interval of **74.000–74.604 Ω** for the specified phantom. This is energy/resistance error control, not a pointwise-current or MR-phase bound. [Details and assumptions](docs/fem-conservative-current.md).
 
-![Complete-electrode FEM fields and h/p refinement](data/synthetic_fem/summary.png)
+**Next:** independent GetDP CEM verification, complete-circuit magnetic fields, then scalable PETSc solves and verified derivatives. The [PDE/FEM roadmap](docs/fem-roadmap.md) defines the next ticket and the remaining geometry/error-control work. The [implementation roadmap](docs/implementation-roadmap.md) connects these gates to spectroscopy and Prisma measurements.
+
+![Adaptive conservative current and energy interval](data/synthetic_fem_adaptive/summary.png)
 
 ![Synthetic tank potential, current density and convergence](data/synthetic_tank/summary.png)
 
@@ -85,6 +87,7 @@ The history connects this work to **Bodurka, Petridou and Bandettini**, biologic
 | [Complete-electrode FEM](docs/fem-complete-electrode.md) | DOLFINx/UFL tensor model, finite electrodes, contact impedance and analytical checks |
 | [PDE/FEM roadmap](docs/fem-roadmap.md) | Error control, conservative currents, GetDP comparisons, PETSc/MPI, MFEM and adjoints |
 | [FEM TDD record](docs/tdd-fem.md) | Recorded failing/passing cycles, convergence-driven refinement and CAD-tag regression |
+| [Conservative current and adaptivity](docs/fem-conservative-current.md) | RT reconstruction, energy intervals, tagged refinement and restartable meshes |
 
 ## 🏷️ Why this name?
 

@@ -44,6 +44,12 @@ Read official DOLFINx installation, SciPy assembly and Gmsh-import documentation
 
 Inspected local `ti-sim` mesh generation and replication notes. The referenced neurofedora sphere source was not present in the local checkout, so its results were not rerun. Implemented and tested DOLFINx CEM directly using the pinned official beta wheel and Gmsh 4.15.2; no GetDP/MFEM execution or PETSc/MPI scaling is claimed. The [TDD record](tdd-fem.md) includes the failed refinement test and a separate CAD-tagging regression. All new datasets are synthetic.
 
+## Conservative FEM and adaptive error control — 26 October 2026
+
+Inspected the official DOLFINx mixed-Poisson example and the installed pinned refinement/tag-transfer/permutation APIs. Added Somersalo et al. (1992) and Díaz-Avalos (2023) to the registry from publisher metadata/abstracts, bringing the atlas to 54 sources. Derived and tested the contact-inclusive energy identity for this implementation's sign convention and SPD tensor model; the cited papers' numerical experiments were not reproduced.
+
+Implemented global serial RT reconstruction, electrode-current guards, energy indicators, tagged local refinement and an XDMF re-solve test. The [adaptive synthetic release](../data/synthetic_fem_adaptive/README.md) meets its 1% relative energy-gap target after one refinement. [Red–green evidence](tdd-fem-conservative.md) includes the half-current regression and the child-cell permutation correction. No GetDP/MFEM solve, complete-circuit field, scanner measurement or conductivity inversion was performed in this milestone.
+
 ## Resources to revisit
 
 | Resource | Access verified here | Use |

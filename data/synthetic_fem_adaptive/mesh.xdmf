@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE Xdmf SYSTEM "Xdmf.dtd" []>
+<Xdmf Version="3.0" xmlns:xi="https://www.w3.org/2001/XInclude">
+  <Domain>
+    <Grid Name="mesh" GridType="Uniform">
+      <Topology TopologyType="Tetrahedron" NumberOfElements="6826" NodesPerElement="4">
+        <DataItem Dimensions="6826 4" NumberType="Int" Format="HDF">mesh.h5:/Mesh/mesh/topology</DataItem>
+      </Topology>
+      <Geometry GeometryType="XYZ">
+        <DataItem Dimensions="1636 3" Format="HDF">mesh.h5:/Mesh/mesh/geometry</DataItem>
+      </Geometry>
+    </Grid>
+    <Grid Name="materials" GridType="Uniform">
+      <xi:include xpointer="xpointer(/Xdmf/Domain/Grid/Geometry)" />
+      <Topology TopologyType="Tetrahedron" NumberOfElements="6826" NodesPerElement="4">
+        <DataItem Dimensions="6826 4" NumberType="Int" Format="HDF">mesh.h5:/MeshTags/materials/topology</DataItem>
+      </Topology>
+      <Attribute Name="materials" AttributeType="Scalar" Center="Cell">
+        <DataItem Dimensions="6826 1" Format="HDF">mesh.h5:/MeshTags/materials/Values</DataItem>
+      </Attribute>
+    </Grid>
+    <Grid Name="boundaries" GridType="Uniform">
+      <xi:include xpointer="xpointer(/Xdmf/Domain/Grid/Geometry)" />
+      <Topology TopologyType="Triangle" NumberOfElements="1658" NodesPerElement="3">
+        <DataItem Dimensions="1658 3" NumberType="Int" Format="HDF">mesh.h5:/MeshTags/boundaries/topology</DataItem>
+      </Topology>
+      <Attribute Name="boundaries" AttributeType="Scalar" Center="Cell">
+        <DataItem Dimensions="1658 1" Format="HDF">mesh.h5:/MeshTags/boundaries/Values</DataItem>
+      </Attribute>
+    </Grid>
+  </Domain>
+</Xdmf>

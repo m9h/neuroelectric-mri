@@ -1,0 +1,33 @@
+{
+  "synthetic": true,
+  "schema_version": 1,
+  "python": "3.12.13",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "mpi_library": "Open MPI v5.0.11, package: Open MPI user@localhost Distribution, ident: 5.0.11, repo rev: v5.0.11rc1, Sep 16, 2026\u0000",
+  "versions": {
+    "fenics-dolfinx": "0.12.0.dev202610191637",
+    "fenics-basix": "0.12.0.dev202610191637",
+    "fenics-ffcx": "0.12.0.dev202610191637",
+    "fenics-ufl": "2026.3.0.dev202610191637",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "gmsh": "4.15.2",
+    "mpi4py": "4.1.2"
+  },
+  "source_sha256": {
+    "examples/fem_tank.py": "ce0b9f9433787777624da1ccc4781884a3eb806860706b1986815351bce67499",
+    "examples/fem_flux.py": "24feba7635e3fe4e7df76b0bdeee495f3369e980397c2284390233627d22e32b",
+    "examples/fem_adaptive.py": "ce087d4917a430f4921d845aabf969d84c355b6096ed91e057a1b3e0ee299ad4",
+    "examples/fem_benchmark.py": "4e5c5918dc7b2069b669afee1706c1fe5c2cecd098c00b42bcd1ad904a381e12",
+    "examples/fem_adaptive_benchmark.py": "9c4309325b42eb6ec742068ee7373ae73dacb6bdf9c2564fd05a722fad6adb3e"
+  },
+  "files_sha256": {
+    "initial.msh": "8aeebc4b7a6590f86ec1b4d4ccc7175c340e8038e064b1cca9881d9e43f9c061",
+    "mesh.xdmf": "871768b0ca5cb9e59027ffcfd7d41313f8fbba6f77fcd64e4b4c7b36a0bce79d",
+    "mesh.h5": "16597f9a2ebf79d8c446358c01e9cce7ab4a8c262f8e67945168b64ac5bc1a3e",
+    "fields.npz": "b80481f94b54b9150309fa77754247697e6237f11f315ec733000823862647ef",
+    "history.csv": "2c2fe29ec88b8e54616910be7a846166d560cbf88ab59ef65ca76e1b55ad4a3c",
+    "parameters.json": "347c62b85408bd654e918aa573a730416c4eda1e6306021e8361b532fd5d0072",
+    "summary.png": "58581a866a91cdaabbe7727c0b605e0555becaeea0d808c08d1c8890aa1039e6"
+  }
+}

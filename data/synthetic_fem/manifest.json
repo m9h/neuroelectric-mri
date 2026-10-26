@@ -15,7 +15,7 @@
     "mpi4py": "4.1.2"
   },
   "source_sha256": {
-    "examples/fem_tank.py": "a56cb2e89cc816daad1ef3d6879bde3caa1daea291717bd7ad35f3f56ef1648c",
+    "examples/fem_tank.py": "ce0b9f9433787777624da1ccc4781884a3eb806860706b1986815351bce67499",
     "examples/fem_benchmark.py": "4e5c5918dc7b2069b669afee1706c1fe5c2cecd098c00b42bcd1ad904a381e12"
   },
   "files_sha256": {

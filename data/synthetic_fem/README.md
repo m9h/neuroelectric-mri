@@ -19,4 +19,6 @@ Load `fields.npz` with `allow_pickle=False`. DOLFINx cell ordering differs from 
 
 E/J are potential-gradient reconstructions, **not equilibrated conservative fluxes**. Bulk/contact power and electrode current use the weak/contact formulation. There are no leads, B fields, MR observations or conductivity inversion in these data. The third floating-electrode reciprocity case and rotated anisotropy are test cases, not additional archived acquisition conditions.
 
+A separate [adaptive release](../synthetic_fem_adaptive/README.md) now provides equilibrated RT currents, energy intervals and locally refined meshes. The gradient fields in this original dataset retain their existing definition.
+
 Regenerate with the isolated environment described in the [solver documentation](../../docs/fem-complete-electrode.md). Repeat generation is tested numerically on a fixed environment; byte identity across operating systems or library versions is not promised. The CI artifact supplies a separate Linux generation. These generated synthetic numerical artifacts are released under **CC0-1.0**, consistent with the other synthetic releases; third-party software retains its own license.

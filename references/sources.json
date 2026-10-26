@@ -4,6 +4,27 @@
   "scope": "Curated neuronal-current MRI, MRCDI, MREIT and related simulation literature; not a systematic review.",
   "sources": [
     {
+      "id": "somersalo1992", "year": 1992,
+      "title": "Existence and Uniqueness for Electrode Models for Electric Current Computed Tomography",
+      "authors": "Somersalo, Erkki and Cheney, Margaret and Isaacson, David",
+      "venue": "SIAM Journal on Applied Mathematics", "doi": "10.1137/0152060",
+      "url": "https://doi.org/10.1137/0152060", "kind": "article", "status": "published",
+      "branch": "CEM/FEM", "evidence": "mathematical electrode model",
+      "finding": "Classical complete electrode model and its existence/uniqueness foundation for current-driven conductivity problems.",
+      "limitation": "Mathematical foundation, not MRI acquisition or validation of this repository's discretization.",
+      "verification": "SIAM publisher metadata/abstract inspected 26 October 2026; full proof not independently reproduced."
+    },
+    {
+      "id": "diazavalos2023", "year": 2023,
+      "title": "Applications of the duality theory of convex analysis to the complete electrode model of electrical impedance tomography",
+      "authors": "Díaz-Avalos, Josué D.", "venue": "Selecciones Matemáticas",
+      "doi": "10.17268/sel.mat.2023.01.09", "url": "https://doi.org/10.17268/sel.mat.2023.01.09",
+      "kind": "article", "status": "published", "branch": "CEM/FEM", "evidence": "duality and a posteriori numerical analysis",
+      "finding": "Develops a current-field dual formulation and CEM error estimates, with finite-element numerical examples.",
+      "limitation": "No MRI validation. The tensor reconstruction and numerical energy bracket here are separately implemented and tested, not a reproduction of this paper's experiments.",
+      "verification": "Publisher abstract and metadata inspected 26 October 2026; full numerical implementation not reproduced."
+    },
+    {
       "id": "kamei1999", "year": 1999,
       "title": "Neuronal current distribution imaging using magnetic resonance",
       "authors": "Kamei, H. and Iramina, K. and Yoshikawa, K. and Ueno, S.",
