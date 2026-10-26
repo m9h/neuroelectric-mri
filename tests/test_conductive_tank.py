@@ -102,7 +102,9 @@ class ConductiveTankTests(unittest.TestCase):
         # Independent exact Laplace solution: x^4 - 6*x^2*y^2 + y^4.
         # A linear slab alone cannot measure convergence because it is exact on every mesh.
         errors = []
-        for n in (4, 8, 16):
+        # Check the asymptotic regime. Four cells per axis are too coarse for
+        # this quartic boundary pattern to meet the second-order rate gate.
+        for n in (8, 16, 32):
             spacing = (.1 / n,) * 3
             centers = (np.arange(n) + .5) / n
             grid = np.meshgrid(centers, centers, centers, indexing="ij")
