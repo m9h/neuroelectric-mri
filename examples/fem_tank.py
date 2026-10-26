@@ -162,6 +162,7 @@ class CEMSolution:
     contact_power_w: float
     supplied_power_w: float
     relative_residual: float
+    contact_impedance_ohm_m2: dict[int, float]
 
 
 def _tensor(value):
@@ -291,4 +292,5 @@ def solve_cem(mesh_data, conductivity_s_m, electrode_currents_a,
     electric.interpolate(fem.Expression(-ufl.grad(potential), points))
     current.interpolate(fem.Expression(-ufl.dot(sigma, ufl.grad(potential)), points))
     return CEMSolution(potential, electric, current, sigma, applied, voltages, currents, areas,
-                       bulk_power, contact_power, sum(applied[t] * voltages[t] for t in tags), residual)
+                       bulk_power, contact_power, sum(applied[t] * voltages[t] for t in tags), residual,
+                       contacts.copy())
