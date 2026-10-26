@@ -6,7 +6,7 @@ The program's objective is to make current-field and conductivity experiments in
 
 ## What exists and what remains proposed
 
-This repository currently provides a literature atlas, ideal phase examples, and a small analytical closed-wire-loop/timing benchmark. It does **not** contain a tissue conductivity solver, scanner sequence, stimulator firmware, validated MR hardware or acquired dataset. The following milestones specify the work needed to build those capabilities.
+This repository currently provides a literature atlas, ideal phase examples, an analytical closed-wire-loop/timing benchmark and a [six-control current/MRSI simulation benchmark](../data/synthetic_mrs_current/README.md) using a pinned mrs-jax implementation. It does **not** contain a tissue conductivity solver, scanner sequence, stimulator firmware, validated MR hardware or acquired dataset. The [implementation roadmap](implementation-roadmap.md) records delivered software and the next coding task; the following milestones define physical validation gates.
 
 ## A common forward model
 
@@ -26,7 +26,7 @@ For passive quasistatic tissue, solve `div(sigma grad u) = 0`, `E = -grad u`, an
 
 Use **SimNIBS as a reference anatomical solver** and an independent analytic or FEM implementation for checks. Connect this to the proposed sbi4dwi/Bloch development through a versioned field/time interface. Preserve complex data and coherent nuisance fields. Keep RF-frequency CTI inputs distinct from injected-current low-frequency conductivity. An SBI posterior must include electrode/contact uncertainty, waveform and timing error, field-model discrepancy and acquisition noise; neural-network output alone does not establish identifiability.
 
-Use **mrs-jax as the spectroscopy simulation and processing development base**: it already has metabolite maps, MRSI/EPSI kernels and a Siemens TWIX reader. The [code audit](mrs-jax-integration.md) identifies the differentiable entry point and the extensions needed for time-varying fields, actual sample timing and quantitative myo-inositol recovery. Share geometry and measured timing with the MRI field model while keeping the metabolic-response parameters distinct. Retain FSL-MRS as a reference/complementary fitter.
+Use **mrs-jax as the spectroscopy simulation and processing development base**: it has metabolite maps, MRSI/EPSI kernels and a Siemens TWIX reader. Its [current-encoding implementation](https://github.com/m9h/mrs-jax/pull/1) adds phase histories and explicit sample timing; quantitative myo-inositol recovery and general dynamic-EPSI inversion remain unvalidated. Share geometry and measured timing with the MRI field model while keeping the metabolic-response parameters distinct. Retain FSL-MRS as a reference/complementary fitter.
 
 ## Milestones with measurable exit criteria
 

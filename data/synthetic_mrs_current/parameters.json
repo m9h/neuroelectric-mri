@@ -1,0 +1,78 @@
+{
+  "shape": [
+    6,
+    6,
+    1
+  ],
+  "n_spectral": 256,
+  "dwell_time_s": 0.0005,
+  "metabolite_order": [
+    "mIns",
+    "Cr",
+    "NAA"
+  ],
+  "loop_vertices_m": [
+    [
+      -0.05,
+      -0.05,
+      0
+    ],
+    [
+      0.05,
+      -0.05,
+      0
+    ],
+    [
+      0.05,
+      0.05,
+      0
+    ],
+    [
+      -0.05,
+      0.05,
+      0
+    ]
+  ],
+  "loop_closure": "last vertex to first",
+  "b0_unit_vector": [
+    0,
+    0,
+    1
+  ],
+  "frame": "right-handed synthetic scanner Cartesian, coordinates in metres",
+  "current_windows_s": [
+    [
+      0.008,
+      0.048
+    ],
+    [
+      0.06,
+      0.09
+    ]
+  ],
+  "base_current_a": [
+    0.002,
+    -0.001
+  ],
+  "sensitivity_intervals": [
+    [
+      0,
+      0.1275,
+      1
+    ]
+  ],
+  "phase_sign": 1,
+  "phase_convention": "+gamma integral_0^t q(u) B_parallel(u) du",
+  "reference_mapping": "Negate neuroelectric-mri Mx+iMy analytical phase for this MRS convention",
+  "noise_sd_per_real_imag_kspace_component": 0.0,
+  "seed": 20261025,
+  "basis": "Illustrative single Lorentzian per metabolite; NOT a coupled-spin mI basis",
+  "basis_centre_freq_hz": 123250000.0,
+  "basis_shifts_ppm": {
+    "mIns": 3.56,
+    "Cr": 3.03,
+    "NAA": 2.01
+  },
+  "basis_linewidth_hz": 3.0,
+  "concentration_units": "nominal mM under unit-amplitude synthetic basis"
+}

@@ -2,6 +2,8 @@
 
 Audit: **25 October 2026**, [m9h/mrs-jax](https://github.com/m9h/mrs-jax), commit [`3220889281da83f49c618cc5cc623fb6b56b3a33`](https://github.com/m9h/mrs-jax/tree/3220889281da83f49c618cc5cc623fb6b56b3a33). Source was retrieved read-only through GitHub and relevant tests were run from a temporary snapshot. No changes were made to mrs-jax.
 
+**Subsequent implementation:** [mrs-jax PR #1](https://github.com/m9h/mrs-jax/pull/1), commit [`138ffb8`](https://github.com/m9h/mrs-jax/commit/138ffb863c1a4ffbfb1297d2b66c4121781fbff6), now adds current-phase histories and explicit EPSI sample timing, fixes the spatial grid/reconstruction and both reported EPSI issues, and replaces the NumPy-backed MRSI wrapper with native JAX computation. Full Linux CI suite: **120 passed, 26 skipped**; the initial local implementation passed 119 before an additional precision test was added. This repository pins that unmerged commit for its [six-control integration benchmark](../data/synthetic_mrs_current/README.md). The audit below records the **earlier pinned implementation**, not the corrected branch. Realistic mI bases, general sample-timed EPSI reconstruction and acquired-data validation remain open; see the [implementation roadmap](implementation-roadmap.md).
+
 The earlier software review omitted this repository. That omission matters: it already contains an MRSI/EPSI forward-model foundation, not just edited single-voxel processing. **Use mrs-jax as our spectroscopy simulation and processing development base**, with FSL-MRS and other established implementations serving as fitting components and independent references where appropriate.
 
 ## What is implemented

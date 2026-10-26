@@ -12,6 +12,8 @@ Searches included full method names to avoid acronym collisions with real-estate
 
 Follow-up: inspected m9h/mrs-jax at commit `3220889281da83f49c618cc5cc623fb6b56b3a33` after its omission from the initial software audit was identified. Retrieved source read-only and ran three upstream simulation test files from a temporary snapshot: 18 passed, 5 skipped for unavailable WAND/ISMRM data. Additional small runtime checks covered gradients, reconstruction input mutation and short-basis behavior. The [audit](mrs-jax-integration.md) distinguishes implemented prototypes from stale README roadmap entries and revises the spectroscopy development plan around mrs-jax. No mrs-jax source changes or full-suite validation were performed.
 
+Implementation follow-up on the same date: cloned mrs-jax, followed its feature-branch/PR contribution workflow, and implemented [PR #1](https://github.com/m9h/mrs-jax/pull/1) at `138ffb863c1a4ffbfb1297d2b66c4121781fbff6`. Baseline full suite: 92 passed, 26 skipped; initial modified local suite: 119 passed, 26 skipped. Linux CI exposed a pre-existing mixed-precision MEGA-PRESS comparison; explicit single/double-precision cases now pass with precision-specific tolerances, and the final Linux suite is 120 passed, 26 skipped (JAX 0.12.0.1). An existing JAX float64-to-float32 warning remains. All 22 neuroelectric-mri workbench tests passed with the new dependency available. This is software/analytical verification; skipped reference data were not downloaded or validated, and no physical equipment was operated.
+
 ## Search families
 
 - `neuronal current MRI`, `neural current imaging`, `ncMRI`, `NCI`, `magnetic source MRI`, `msMRI`.

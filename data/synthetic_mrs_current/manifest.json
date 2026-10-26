@@ -1,0 +1,357 @@
+{
+  "schema": "neuroelectric-mri.synthetic-mrs-current/0.1",
+  "data_kind": "synthetic",
+  "scanner_data_available": false,
+  "measured_current_available": false,
+  "mrs_jax_revision": "138ffb863c1a4ffbfb1297d2b66c4121781fbff6",
+  "mrs_jax_worktree_dirty": false,
+  "python_version": "3.12.13",
+  "dependencies": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "arrays": {
+    "positions_m": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "field_per_amp_t": {
+      "shape": [
+        6,
+        6,
+        1
+      ],
+      "dtype": "float64"
+    },
+    "sample_times_s": {
+      "shape": [
+        256
+      ],
+      "dtype": "float64"
+    },
+    "basis_fids": {
+      "shape": [
+        3,
+        256
+      ],
+      "dtype": "complex64"
+    },
+    "roi_mask": {
+      "shape": [
+        6,
+        6,
+        1
+      ],
+      "dtype": "bool"
+    },
+    "t2star_s": {
+      "shape": [
+        6,
+        6,
+        1
+      ],
+      "dtype": "float64"
+    },
+    "b0_hz": {
+      "shape": [
+        6,
+        6,
+        1
+      ],
+      "dtype": "float64"
+    },
+    "null_kspace": {
+      "shape": [
+        6,
+        6,
+        1,
+        256
+      ],
+      "dtype": "complex128"
+    },
+    "null_phase_rad": {
+      "shape": [
+        6,
+        6,
+        1,
+        256
+      ],
+      "dtype": "float64"
+    },
+    "null_concentrations_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "null_oracle_fit_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "null_unaware_fit_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "phase_only_kspace": {
+      "shape": [
+        6,
+        6,
+        1,
+        256
+      ],
+      "dtype": "complex128"
+    },
+    "phase_only_phase_rad": {
+      "shape": [
+        6,
+        6,
+        1,
+        256
+      ],
+      "dtype": "float64"
+    },
+    "phase_only_concentrations_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "phase_only_oracle_fit_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "phase_only_unaware_fit_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "concentration_only_kspace": {
+      "shape": [
+        6,
+        6,
+        1,
+        256
+      ],
+      "dtype": "complex128"
+    },
+    "concentration_only_phase_rad": {
+      "shape": [
+        6,
+        6,
+        1,
+        256
+      ],
+      "dtype": "float64"
+    },
+    "concentration_only_concentrations_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "concentration_only_oracle_fit_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "concentration_only_unaware_fit_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "combined_kspace": {
+      "shape": [
+        6,
+        6,
+        1,
+        256
+      ],
+      "dtype": "complex128"
+    },
+    "combined_phase_rad": {
+      "shape": [
+        6,
+        6,
+        1,
+        256
+      ],
+      "dtype": "float64"
+    },
+    "combined_concentrations_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "combined_oracle_fit_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "combined_unaware_fit_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "reverse_polarity_kspace": {
+      "shape": [
+        6,
+        6,
+        1,
+        256
+      ],
+      "dtype": "complex128"
+    },
+    "reverse_polarity_phase_rad": {
+      "shape": [
+        6,
+        6,
+        1,
+        256
+      ],
+      "dtype": "float64"
+    },
+    "reverse_polarity_concentrations_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "reverse_polarity_oracle_fit_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "reverse_polarity_unaware_fit_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "delayed_current_kspace": {
+      "shape": [
+        6,
+        6,
+        1,
+        256
+      ],
+      "dtype": "complex128"
+    },
+    "delayed_current_phase_rad": {
+      "shape": [
+        6,
+        6,
+        1,
+        256
+      ],
+      "dtype": "float64"
+    },
+    "delayed_current_concentrations_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "delayed_current_oracle_fit_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "delayed_current_unaware_fit_mM": {
+      "shape": [
+        6,
+        6,
+        1,
+        3
+      ],
+      "dtype": "float64"
+    }
+  },
+  "source_sha256": {
+    "generator": "5d2e5f38fa9d99d6de67001962b6a27d2722d35fa54bf0eb0dba60fff29177f3",
+    "loop_field": "068f3dc02fe279d2568d15dfcc185d1e70709e4876f0995a29ad7d0689cbe086",
+    "current_encoding": "c39dfa2f9b1bcf6bd0944de181ca0409fd4d492d2ae2d9c063e8d1bf536c9347",
+    "mrsi_sim": "9a4545f32b727521966ba316f39a6ef53c6e57638c84fd8c9c994db4506ea78c"
+  },
+  "files_sha256": {
+    "signals.npz": "4cdce56328f347df9a834999dc0063dcb335a185a0802c92f4409e362c8de658",
+    "metrics.csv": "e7d7ef07201ee23f340ab5c6c71c0375c7299ab12cb6ff3582a776e13d271454",
+    "parameters.json": "6587b15cc27cd54c797f669eb52a547e3e2bfde3c10800844a15a6e843583706"
+  },
+  "limitations": [
+    "Oracle phase uses known simulation truth; no conductivity inference",
+    "Matched forward/fitting basis is a software check, not independent mI validation",
+    "No coils, motion, lipid baseline, hardware response or scanner sequence",
+    "Phase-encoded MRSI assumes the same excitation-relative waveform for every encode",
+    "Synthetic waveform amplitudes are not hardware operating recommendations"
+  ]
+}

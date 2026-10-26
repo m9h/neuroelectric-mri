@@ -1,6 +1,6 @@
 # A simulation program tied to sbi4dwi and mrs-jax
 
-This is a proposed research program, informed by read-only source audits. This repository implements analytical phase-budget and closed-loop current/timing benchmarks. The separate **mrs-jax** repository already contains MRSI/EPSI simulation prototypes; see the [pinned implementation audit and test results](mrs-jax-integration.md). No acquired MREIT result has been reproduced here.
+This research program began with source audits and now includes analytical phase-budget, closed-loop current/timing and [current/MRSI integration benchmarks](../data/synthetic_mrs_current/README.md). The separate **mrs-jax** implementation is linked and pinned in the [implementation roadmap](implementation-roadmap.md), which records delivered work and the next coding ticket. The [original audit](mrs-jax-integration.md) preserves its earlier findings. No acquired MREIT result has been reproduced here.
 
 ## The historical benchmark is already unusually close
 
@@ -30,7 +30,7 @@ The nearby `neurojax/src/neurojax/geometry/bem.py` inspected here contains MNE/F
 
 ## Proposed forward chain
 
-For stimulation-response spectroscopy, reuse mrs-jax's concentration maps, basis FIDs and spatial encoding. It needs a time-dependent field/phase-history interface and actual EPSI ADC timing before it can model current-induced readout effects. Keep direct current-field contrast and downstream metabolite changes as separate model parameters. FSL-MRS remains a useful independent basis/fitting reference. The [integration plan](mrs-jax-integration.md) identifies existing entry points and gaps.
+For stimulation-response spectroscopy, reuse mrs-jax's concentration maps, basis FIDs and spatial encoding. Its current-encoding branch now supports separable current-field phase histories and explicit EPSI ADC timing; general dynamic fields, sequence evolution and sample-timed inversion remain to be developed. Keep direct current-field contrast and downstream metabolite changes as separate model parameters. FSL-MRS remains a useful independent basis/fitting reference. The [implementation roadmap](implementation-roadmap.md) distinguishes the delivered synthetic bridge from those further requirements.
 
 ```mermaid
 flowchart LR

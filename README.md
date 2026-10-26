@@ -46,7 +46,7 @@ Our proposed experimental starting point is a **Siemens Prisma 3 T**, connecting
 | [Active groups and software audit](docs/mreit-ecosystem.md) | [Prisma program and Siemens technical brief](docs/prisma-platform.md) | [Open-data contract](docs/open-data.md) |
 | SimNIBS, MRCI, CoReHA, CTI and MRSI | Scanner triggers, external gating, current monitoring and verification | Geometry, raw complex data, waveforms, clocks, provenance and null controls |
 
-**Implemented:** analytical closed-loop magnetic fields and refocusing-aware timing examples, with 19 numerical tests across the workbench. **Planned:** tissue conductivity inversion, scanner sequences, equipment and measured datasets. The checked-in [75-point reference fixture](data/synthetic_loop/manifest.json) is explicitly synthetic.
+**Implemented:** analytical closed-loop fields, refocusing-aware timing, and a [six-control current/MRSI benchmark](data/synthetic_mrs_current/README.md) using mrs-jax, with 22 workbench tests when its simulation dependency is installed. **Next:** conductivity forward benchmarks, realistic spectroscopy validation, bench timing, Prisma phantom measurements, then independent reproduction. See the [implementation roadmap](docs/implementation-roadmap.md). Both checked-in datasets are synthetic.
 
 ## 🕰️ The historical thread
 
@@ -63,6 +63,7 @@ The history connects this work to **Bodurka, Petridou and Bandettini**, biologic
 | [MREIT and conductivity](docs/mreit.md) | What survived, functional MREIT, DT-MREIT and EPT distinctions |
 | [MREIT groups and software](docs/mreit-ecosystem.md) | Recent activity, software availability, datasets and MRSI connection |
 | [mrs-jax integration](docs/mrs-jax-integration.md) | Existing MRSI/EPSI code, targeted runtime checks and the spectroscopy development plan |
+| [Implementation roadmap](docs/implementation-roadmap.md) | Delivered code, next coding ticket and evidence gates through Prisma datasets |
 | [Prisma platform](docs/prisma-platform.md) | Modeling milestones, equipment requirements, synchronization and Siemens brief |
 | [Open-data contract](docs/open-data.md) | Raw data, geometry, clocks, calibration and reproducibility |
 | [Simulation roadmap](docs/simulation-roadmap.md) | Inspected sbi4dwi code, missing physics, concrete benchmarks |
@@ -72,6 +73,7 @@ The history connects this work to **Bodurka, Petridou and Bandettini**, biologic
 | [BibTeX](references/references.bib) / [CSV](references/literature.csv) | Citation-manager and spreadsheet exports |
 | [Phase-budget example](examples/phase_budget.py) | Executable sanity checks for field-to-phase sensitivity |
 | [Current-phantom benchmark](examples/current_phantom.py) | Closed-loop fields, signed encoding and timing perturbations |
+| [Current/MRSI benchmark](data/synthetic_mrs_current/README.md) | Six controls separating injected phase and concentration; raw complex synthetic data |
 
 ## 🏷️ Why this name?
 
@@ -89,6 +91,14 @@ python3 -m unittest discover -s tests -v
 python3 scripts/build_references.py --check
 ```
 
-The examples compute ideal phase budgets, closed-wire-loop fields, cancellation cases and timing-dependent phase errors. They do not implement tissue conductivity reconstruction or reproduce an acquired experiment. The larger simulator and measurement platform are proposed roadmaps. No changes to sbi4dwi are required to run this repository.
+The standard-library examples compute ideal phase budgets, closed-wire-loop fields, cancellation cases and timing-dependent phase errors. The three spectroscopy integration tests skip if mrs-jax is unavailable. To run the complete workbench and regenerate its current/MRSI fixture:
+
+```sh
+python -m pip install -r requirements-simulation.txt
+python examples/mrs_current_benchmark.py --output /tmp/synthetic-mrs-current
+python -m unittest discover -s tests -v
+```
+
+The workbench does not implement tissue conductivity reconstruction or reproduce an acquired experiment. No changes to sbi4dwi are required.
 
 For a research program, start with calibrated current phantoms and artifact controls; then test whether plausible neural sources remain identifiable after voxel averaging, acquisition, and nuisance variability. Simulation-based inference becomes useful once this forward problem and its null cases are credible.

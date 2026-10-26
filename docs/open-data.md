@@ -2,6 +2,8 @@
 
 Scope: a proposed phantom-first release format, drafted 25 October 2026. No acquired dataset has been released by this repository. The checked-in analytical examples are **synthetic reference calculations**, not scanner data or a conductivity ground truth.
 
+The [current/MRSI fixture](../data/synthetic_mrs_current/README.md) exercises a subset of this contract with raw complex **synthetic** k-space, phase/concentration truth, waveform geometry/timing, source/file hashes and a pinned mrs-jax revision. It is not a completed physical-data release.
+
 ## Release contents
 
 | Asset | Required information |
