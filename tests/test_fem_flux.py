@@ -125,6 +125,16 @@ class ConservativeCurrentTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             reconstruct_current(build_tank_mesh(), solution)
 
+    def test_changed_contact_data_cannot_masquerade_as_an_admissible_flux(self):
+        from dataclasses import replace
+        data = build_tank_mesh()
+        solution = self.solve(data)
+        inconsistent = replace(solution, contact_impedance_ohm_m2={t: 2 * z for t, z in self.contacts.items()})
+        # This altered trace is globally balanced but carries only half the
+        # prescribed current. Divergence checks alone do not detect that.
+        with self.assertRaises(ValueError):
+            reconstruct_current(data, inconsistent)
+
     def test_bulk_marking_is_minimal_deterministic_and_has_zero_null(self):
         indicators = np.array([1., 4., 2., 4., 0.])
         np.testing.assert_array_equal(mark_cells(indicators, .6), [1, 3])
