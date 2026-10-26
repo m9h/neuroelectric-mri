@@ -42,7 +42,8 @@ class TankBenchmarkTests(unittest.TestCase):
                 np.testing.assert_allclose(fields["scaled_inclusion_current_density_a_m2"], j,
                                             atol=1e-11)
                 np.testing.assert_array_equal(fields["current_off_current_density_a_m2"], np.zeros_like(j))
-            rows = list(csv.DictReader((output / "convergence.csv").open()))
+            with (output / "convergence.csv").open() as stream:
+                rows = list(csv.DictReader(stream))
             self.assertEqual([int(r["cells_per_axis"]) for r in rows], [4, 8])
             self.assertLess(float(rows[1]["potential_relative_l2_error"]),
                             float(rows[0]["potential_relative_l2_error"]))

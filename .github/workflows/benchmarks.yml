@@ -17,3 +17,4 @@ jobs:
       - run: python -m unittest discover -s tests -v
       - run: python scripts/build_references.py --check
       - run: python examples/mrs_current_benchmark.py --output /tmp/synthetic-mrs-current
+      - run: python examples/tank_benchmark.py --output /tmp/synthetic-tank --plot

@@ -1,0 +1,3 @@
+# Minimal numerical tank dependencies; mrs-jax is not needed for this solver.
+numpy>=1.24
+scipy>=1.10
