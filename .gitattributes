@@ -1,2 +1,4 @@
 # Preserve Gmsh's native ASCII serialization, including its trailing spaces.
 data/synthetic_fem/*.msh -whitespace linguist-generated=true
+data/synthetic_fem_adaptive/*.msh -whitespace linguist-generated=true
+data/synthetic_fem_adaptive/*.xdmf linguist-generated=true
