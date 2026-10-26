@@ -23,7 +23,8 @@ class FEMReleaseTests(unittest.TestCase):
             self.assertEqual(manifest["solver"], "DOLFINx CEM / SciPy serial")
             for path, digest in manifest["files_sha256"].items():
                 self.assertEqual(hashlib.sha256((root / path).read_bytes()).hexdigest(), digest)
-            rows = list(csv.DictReader((root / "metrics.csv").open()))
+            with (root / "metrics.csv").open() as stream:
+                rows = list(csv.DictReader(stream))
             self.assertEqual(len(rows), 10)
             patches = [r for r in rows if r["case"] == "finite_patch"]
             for r in rows:

@@ -45,7 +45,8 @@ def build_tank_mesh(lengths_m=(.12, .08, .06), mesh_size_m=.02,
     centered on x-/x+, remaining exterior facets have tag 199. Material 1
     fills the tank unless ``layered=True``, when the right half has tag 2.
     Optional ``mesh_path`` writes the tagged MSH 4.1 mesh, before import.
-    Linear geometry is exact for this planar CAD; polynomial solution order
+    Finite electrode edges use a distance size field: h/8 at the edge, grading
+    to h over distance h. Linear geometry is exact for this planar CAD; solution order
     is chosen separately in ``solve_cem``. The builder owns its Gmsh session.
     """
     lengths = _real(lengths_m, "lengths_m")
@@ -104,8 +105,25 @@ def build_tank_mesh(lengths_m=(.12, .08, .06), mesh_size_m=.02,
         for tag, entities in groups.items():
             if entities:
                 gmsh.model.addPhysicalGroup(2, entities, tag, name=f"boundary_{tag}")
-        gmsh.option.setNumber("Mesh.MeshSizeMin", h)
+        gmsh.option.setNumber("Mesh.MeshSizeMin", h / 8 if fraction < 1 else h)
         gmsh.option.setNumber("Mesh.MeshSizeMax", h)
+        if fraction < 1:
+            # Resolve the contact/insulation transition rather than spending
+            # the same fine mesh throughout the otherwise smooth tank.
+            electrode_surfaces = [(2, t) for label in (101, 102) for t in groups[label]]
+            edges = gmsh.model.getBoundary(electrode_surfaces, combined=False, oriented=False)
+            field = gmsh.model.mesh.field
+            distance = field.add("Distance")
+            field.setNumbers(distance, "CurvesList", sorted({t for _, t in edges}))
+            field.setNumber(distance, "Sampling", 100)
+            threshold = field.add("Threshold")
+            for key, value in (("InField", distance), ("SizeMin", h / 8),
+                               ("SizeMax", h), ("DistMin", 0.), ("DistMax", h)):
+                field.setNumber(threshold, key, value)
+            field.setAsBackgroundMesh(threshold)
+            gmsh.option.setNumber("Mesh.MeshSizeExtendFromBoundary", 0)
+            gmsh.option.setNumber("Mesh.MeshSizeFromPoints", 0)
+            gmsh.option.setNumber("Mesh.MeshSizeFromCurvature", 0)
         gmsh.option.setNumber("Mesh.MshFileVersion", 4.1)
         gmsh.model.mesh.generate(3)
         if mesh_path is not None:

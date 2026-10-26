@@ -92,7 +92,7 @@ class CompleteElectrodeTests(unittest.TestCase):
     def test_finite_patches_polarity_off_gauge_and_reciprocity(self):
         data = build_tank_mesh(patch_fraction=.5)
         # A third, floating equipotential electrode covers the remaining outer surface.
-        contacts = dict(self.contacts, **{})
+        contacts = self.contacts.copy()
         contacts[199] = .004
         drive_a = {101: .001, 102: -.001, 199: 0.}
         drive_b = {101: 0., 102: -.001, 199: .001}

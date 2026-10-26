@@ -18,3 +18,21 @@ jobs:
       - run: python scripts/build_references.py --check
       - run: python examples/mrs_current_benchmark.py --output /tmp/synthetic-mrs-current
       - run: python examples/tank_benchmark.py --output /tmp/synthetic-tank --plot
+  fem-benchmarks:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y libglu1-mesa
+      - run: python -m pip install -r requirements-fem.txt
+      - run: python -m pip install matplotlib
+      # Fail explicitly on missing native dependencies; optional tests may not all skip.
+      - run: python -c 'import dolfinx, gmsh, scipy; from mpi4py import MPI; print(dolfinx.__version__, gmsh.__version__, MPI.Get_library_version())'
+      - run: python -m unittest discover -s tests -p 'test_fem*.py' -v
+      - run: python examples/fem_benchmark.py --output /tmp/synthetic-fem --plot
+      - uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-fem
+          path: /tmp/synthetic-fem
