@@ -33,11 +33,17 @@ def _write_csv(path, rows):
 
 def _diagnostics(result):
     currents = result.boundary_current_a
-    throughput = .5 * sum(abs(i) for i in currents.values())
+    # Integrate local normal current magnitudes before summing over faces.
+    # A nonuniform boundary can inject and withdraw on the same face.
+    throughput = .5 * sum(
+        np.sum(abs(np.take(face, 0, axis=axis))) + np.sum(abs(np.take(face, -1, axis=axis)))
+        for axis, face in enumerate(result.face_current_a)
+    )
     cell_balance = sum(np.diff(f, axis=a) for a, f in enumerate(result.face_current_a))
     return dict(
         boundary_net_current_a=float(sum(currents.values())),
-        boundary_relative_imbalance=abs(sum(currents.values())) / max(throughput, 1e-30),
+        boundary_absolute_throughput_a=float(throughput),
+        boundary_relative_imbalance=float(abs(sum(currents.values())) / max(throughput, 1e-30)),
         max_cell_current_imbalance_a=float(np.max(abs(cell_balance))),
         boundary_power_w=result.boundary_power_w,
         dissipated_power_w=result.dissipated_power_w,
@@ -113,6 +119,8 @@ def _plot_summary(output, arrays, convergence, spacing):
     axes[2].set(xlabel="Cells per axis", ylabel="Relative L2 error",
                 title="Independent harmonic reference")
     axes[2].grid(True, which="both", alpha=.2)
+    axes[2].set_xticks(n, labels=[str(value) for value in n])
+    axes[2].minorticks_off()
     axes[2].legend(frameon=False)
     fig.suptitle("Synthetic conductive tank • scalar conductivity • no scanner measurements")
     fig.savefig(output / "summary.png", dpi=180)
