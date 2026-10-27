@@ -1,0 +1,10 @@
+Info    : Started (Mon Oct 26 22:25:33 2026, Wall = 0.000355959s, CPU = 0.001469s, Mem = 3.07812MB)
+P r e - P r o c e s s i n g . . .
+Info    : System 1/1: 932 Dofs
+E n d   P r e - P r o c e s s i n g
+P r o c e s s i n g . . .
+E n d   P r o c e s s i n g
+P o s t - P r o c e s s i n g . . .
+Warning : No Jacobian method specification in PostProcessing quantity: using default Jacobian (Vol)
+E n d   P o s t - P r o c e s s i n g
+Info    : Stopped (Mon Oct 26 22:25:33 2026, Wall = 0.0144601s, CPU = 0.013493s, Mem = 15.9688MB)

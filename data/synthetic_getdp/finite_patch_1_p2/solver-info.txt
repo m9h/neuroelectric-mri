@@ -1,0 +1,13 @@
+GetDP
+Version          : 4.0.0-git-259f4c38
+License          : GNU General Public License
+Build OS         : MacOSARM
+Build date       : 20261012
+Build host       : getdp.info
+Build options    : 64Bit Arpack[contrib] Blas[veclib] Gmsh Kernel Lapack[veclib] PETSc PeWe SLEPc
+PETSc version    : 3.17.4 (complex arithmetic)
+Gmsh lib version : 5.0.0-git-03624e585-git-03624e585 (20261012)
+Gmsh lib options : 64Bit Dlopen Eigen[contrib] Parser Post TinyXML2[contrib] tinyobjloader
+Packaged by      : geuzaine
+Web site         : http://getdp.info
+Issue tracker    : https://gitlab.onelab.info/getdp/getdp/issues

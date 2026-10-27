@@ -46,6 +46,6 @@ python3.12 -m venv .venv-fem
 .venv-fem/bin/python examples/fem_benchmark.py --output /tmp/synthetic-fem --plot
 ```
 
-The FEM CI job checks imports explicitly, runs all 25 tests without skips and exports both FEM releases. The spectroscopy/FV job runs the previous 37 tests in its own environment; optional FEM tests skip there. These are 62 distinct tests across the two environments.
+The FEM CI job checks imports and the native GetDP executable explicitly, runs 25 DOLFINx tests plus nine [GetDP/comparison tests](getdp-verification.md) without skips, and exports three FEM releases. The spectroscopy/FV job runs 37 tests in its own environment; optional native tests skip there. These are **71 distinct tests** across the two environments.
 
-The companion [conservative-current model](fem-conservative-current.md) now reconstructs H(div) currents and drives local refinement with an energy indicator. Remaining work in the [FEM roadmap](fem-roadmap.md) includes independent GetDP CEM, complete-circuit magnetics, broader geometry/tensor error studies, PETSc/MPI, derivatives and measurements. There is no conductivity inversion, anatomical validation or scanner acquisition in this release.
+The companion [conservative-current model](fem-conservative-current.md) reconstructs H(div) currents and drives local refinement with an energy indicator. [Independent GetDP CEM verification](getdp-verification.md) is now delivered. Remaining work in the [FEM roadmap](fem-roadmap.md) includes complete-circuit magnetics, broader geometry/tensor error studies, PETSc/MPI, derivatives and measurements. There is no conductivity inversion, anatomical validation or scanner acquisition in this release.

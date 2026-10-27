@@ -46,11 +46,13 @@ Our proposed experimental starting point is a **Siemens Prisma 3 T**, connecting
 | [Active groups and software audit](docs/mreit-ecosystem.md) | [Prisma program and Siemens technical brief](docs/prisma-platform.md) | [Open-data contract](docs/open-data.md) |
 | SimNIBS, MRCI, CoReHA, CTI and MRSI | Scanner triggers, external gating, current monitoring and verification | Geometry, raw complex data, waveforms, clocks, provenance and null controls |
 
-**Implemented:** analytical closed-loop fields, refocusing-aware timing, a [six-control current/MRSI benchmark](data/synthetic_mrs_current/README.md), a [conservative finite-volume tank](data/synthetic_tank/README.md), and a [DOLFINx/Gmsh complete-electrode FEM model](data/synthetic_fem/README.md) with tensor conductivity and contact impedance. The new [adaptive conservative-current release](data/synthetic_fem_adaptive/README.md) adds Raviart–Thomas currents, contact-inclusive energy error indicators and tagged local mesh refinement. **62 distinct tests** span the spectroscopy/FV and FEM environments. Red–green TDD records: [FV](docs/tdd-conductive-tank.md) · [CEM](docs/tdd-fem.md) · [conservation/adaptivity](docs/tdd-fem-conservative.md). All checked-in datasets are synthetic.
+**Implemented:** analytical closed-loop fields, refocusing-aware timing, a [six-control current/MRSI benchmark](data/synthetic_mrs_current/README.md), a [conservative finite-volume tank](data/synthetic_tank/README.md), and a [DOLFINx/Gmsh complete-electrode FEM model](data/synthetic_fem/README.md) with tensor conductivity and contact impedance. The [adaptive conservative-current release](data/synthetic_fem_adaptive/README.md) adds Raviart–Thomas currents, contact-inclusive energy indicators and tagged refinement. The new [independent GetDP release](data/synthetic_getdp/README.md) verifies nine matched cases, including the exported adaptive mesh, with relative voltage/current-sample differences below 1.2×10⁻¹². **71 distinct tests** span the two environments. Red–green records: [FV](docs/tdd-conductive-tank.md) · [CEM](docs/tdd-fem.md) · [adaptivity](docs/tdd-fem-conservative.md) · [GetDP](docs/tdd-getdp.md). All checked-in datasets are synthetic.
 
 **Latest numerical result:** one adaptive refinement reduces the relative CEM energy gap from **2.79% to 0.817%**, giving a numerical resistance interval of **74.000–74.604 Ω** for the specified phantom. This is energy/resistance error control, not a pointwise-current or MR-phase bound. [Details and assumptions](docs/fem-conservative-current.md).
 
-**Next:** independent GetDP CEM verification, complete-circuit magnetic fields, then scalable PETSc solves and verified derivatives. The [PDE/FEM roadmap](docs/fem-roadmap.md) defines the next ticket and the remaining geometry/error-control work. The [implementation roadmap](docs/implementation-roadmap.md) connects these gates to spectroscopy and Prisma measurements.
+**Next:** complete-circuit magnetic fields with explicit outgoing/return leads and electrode connections, then scalable PETSc solves and verified derivatives. The [PDE/FEM roadmap](docs/fem-roadmap.md) defines the next ticket and remaining geometry/error-control work. The [implementation roadmap](docs/implementation-roadmap.md) connects these gates to spectroscopy and Prisma measurements.
+
+![Independent GetDP and DOLFINx verification](data/synthetic_getdp/summary.png)
 
 ![Adaptive conservative current and energy interval](data/synthetic_fem_adaptive/summary.png)
 
@@ -88,6 +90,7 @@ The history connects this work to **Bodurka, Petridou and Bandettini**, biologic
 | [PDE/FEM roadmap](docs/fem-roadmap.md) | Error control, conservative currents, GetDP comparisons, PETSc/MPI, MFEM and adjoints |
 | [FEM TDD record](docs/tdd-fem.md) | Recorded failing/passing cycles, convergence-driven refinement and CAD-tag regression |
 | [Conservative current and adaptivity](docs/fem-conservative-current.md) | RT reconstruction, energy intervals, tagged refinement and restartable meshes |
+| [Independent GetDP verification](docs/getdp-verification.md) | Native CEM, nine-case comparison, tested adaptive mesh conversion and solver provenance |
 
 ## 🏷️ Why this name?
 
@@ -114,6 +117,6 @@ python examples/tank_benchmark.py --output /tmp/synthetic-tank --plot
 python -m unittest discover -s tests -v
 ```
 
-For just the FV tank, install `requirements-tank.txt`; matplotlib is optional for its figure. For the FEM suite, install `requirements-fem.txt` in a separate environment and follow the [FEM reproduction instructions](docs/fem-complete-electrode.md#reproduce). The workbench does not perform conductivity inversion or reproduce an acquired experiment. No changes to sbi4dwi are required.
+For just the FV tank, install `requirements-tank.txt`; matplotlib is optional for its figure. For the FEM suite, install `requirements-fem.txt` in a separate environment and follow the [FEM reproduction instructions](docs/fem-complete-electrode.md#reproduce). Add the native solver using the [GetDP reproduction instructions](docs/getdp-verification.md#reproduce) for independent comparisons. The workbench does not perform conductivity inversion or reproduce an acquired experiment. No changes to sbi4dwi are required.
 
 For a research program, start with calibrated current phantoms and artifact controls; then test whether plausible neural sources remain identifiable after voxel averaging, acquisition, and nuisance variability. Simulation-based inference becomes useful once this forward problem and its null cases are credible.

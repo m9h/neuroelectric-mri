@@ -62,6 +62,6 @@ python -m unittest discover -s tests -p 'test_fem*.py' -v
 python examples/fem_adaptive_benchmark.py --output /tmp/synthetic-fem-adaptive --plot
 ```
 
-There are 25 FEM tests, including 14 added for reconstruction, refinement and release/restart behavior. With the 37 spectroscopy/FV tests, this is **62 distinct tests** across the two environments. [TDD history](tdd-fem-conservative.md).
+There are 25 DOLFINx FEM tests, including 14 for reconstruction, refinement and release/restart behavior. With 37 spectroscopy/FV tests and nine new GetDP/comparison tests, this is **71 distinct tests** across the two environments. [TDD history](tdd-fem-conservative.md) · [GetDP history](tdd-getdp.md).
 
-The next external validation gate is an independent GetDP CEM solve on the same tagged mesh, followed by outgoing/return-lead geometry and complete-circuit B. Broader manufactured tensor fields, mesh-quality/geometry-order studies, B-oriented estimators, MPI scaling and adjoints remain open in the [FEM roadmap](fem-roadmap.md).
+The [independent GetDP CEM solve](getdp-verification.md) now reproduces the adaptive primal endpoint after a tested tagged-mesh conversion. Outgoing/return-lead geometry and complete-circuit B are next. Broader manufactured tensor fields, mesh-quality/geometry-order studies, B-oriented estimators, MPI scaling and adjoints remain open in the [FEM roadmap](fem-roadmap.md).
