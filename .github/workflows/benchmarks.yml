@@ -32,11 +32,20 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y libglu1-mesa
       - run: python -m pip install -r requirements-fem.txt
       - run: python -m pip install matplotlib
+      - name: Install checksum-pinned independent GetDP release
+        run: |
+          curl -L --fail --retry 3 https://getdp.info/bin/Linux/getdp-3.5.0-Linux64c.tgz -o /tmp/getdp.tgz
+          printf '%s\n' 'd3c28fa18f20d6147b4c7367d4dd802e9f7ddb58c608688bbb71919dbca8041d  /tmp/getdp.tgz' | sha256sum --check
+          tar -xzf /tmp/getdp.tgz -C /tmp
+          printf '%s\n' '/tmp/getdp-3.5.0-Linux64/bin' >> "$GITHUB_PATH"
       # Fail explicitly on missing native dependencies; optional tests may not all skip.
       - run: python -c 'import dolfinx, gmsh, scipy; from mpi4py import MPI; print(dolfinx.__version__, gmsh.__version__, MPI.Get_library_version())'
+      - run: getdp -info
       - run: python -m unittest discover -s tests -p 'test_fem*.py' -v
+      - run: python -m unittest discover -s tests -p 'test_getdp*.py' -v
       - run: python examples/fem_benchmark.py --output /tmp/synthetic-fem --plot
       - run: python examples/fem_adaptive_benchmark.py --output /tmp/synthetic-fem-adaptive --plot
+      - run: python examples/getdp_benchmark.py --output /tmp/synthetic-getdp --plot
       - uses: actions/upload-artifact@v4
         with:
           name: synthetic-fem
@@ -45,3 +54,7 @@ jobs:
         with:
           name: synthetic-fem-adaptive
           path: /tmp/synthetic-fem-adaptive
+      - uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-getdp
+          path: /tmp/synthetic-getdp
